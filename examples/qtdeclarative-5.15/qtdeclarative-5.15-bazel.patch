@@ -1,0 +1,2828 @@
+diff --git a/examples/BUILD b/examples/BUILD
+new file mode 100644
+index 0000000000..e69de29bb2
+diff --git a/examples/qml/BUILD b/examples/qml/BUILD
+new file mode 100644
+index 0000000000..e69de29bb2
+diff --git a/examples/qml/dynamicscene/BUILD b/examples/qml/dynamicscene/BUILD
+new file mode 100644
+index 0000000000..e313716b60
+--- /dev/null
++++ b/examples/qml/dynamicscene/BUILD
+@@ -0,0 +1,25 @@
++load("@com_github_kklochkov_rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
++
++qt_qrc(
++    name = "data",
++    srcs = ["dynamicscene.qrc"],
++    data = glob([
++        "content/**/*",
++        "**/*.qml",
++    ]),
++)
++
++qt_cc_binary(
++    name = "dynamicscene",
++    srcs = ["main.cpp"],
++    qrc_srcs = [":data"],
++    visibility = ["//visibility:public"],
++    deps = [
++        "//{root}/shared".format(root = package_name().replace("/qml/dynamicscene", "/quick")),
++        "@qt//:QtCore",
++        "@qt//:QtGui",
++        "@qt//:QtNetwork",
++        "@qt//:QtQml",
++        "@qt//:QtQuick",
++    ],
++)
+diff --git a/examples/qml/networkaccessmanagerfactory/BUILD b/examples/qml/networkaccessmanagerfactory/BUILD
+new file mode 100644
+index 0000000000..96f358371b
+--- /dev/null
++++ b/examples/qml/networkaccessmanagerfactory/BUILD
+@@ -0,0 +1,23 @@
++load("@com_github_kklochkov_rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
++
++qt_qrc(
++    name = "data",
++    srcs = ["networkaccessmanagerfactory.qrc"],
++    data = glob([
++        "**/*.qml",
++    ]),
++)
++
++qt_cc_binary(
++    name = "networkaccessmanagerfactory",
++    srcs = ["main.cpp"],
++    qrc_srcs = [":data"],
++    visibility = ["//visibility:public"],
++    deps = [
++        "@qt//:QtCore",
++        "@qt//:QtGui",
++        "@qt//:QtNetwork",
++        "@qt//:QtQml",
++        "@qt//:QtQuick",
++    ],
++)
+diff --git a/examples/qml/referenceexamples/adding/BUILD b/examples/qml/referenceexamples/adding/BUILD
+new file mode 100644
+index 0000000000..e0ab7761a7
+--- /dev/null
++++ b/examples/qml/referenceexamples/adding/BUILD
+@@ -0,0 +1,26 @@
++load("@com_github_kklochkov_rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
++
++qt_qrc(
++    name = "data",
++    srcs = ["adding.qrc"],
++    data = ["example.qml"],
++)
++
++qt_cc_binary(
++    name = "adding",
++    srcs = [
++        "main.cpp",
++        "person.cpp",
++    ],
++    moc_hdrs = ["person.h"],
++    qml_module_name = "People",
++    qrc_srcs = [":data"],
++    visibility = ["//visibility:public"],
++    deps = [
++        "@qt//:QtCore",
++        "@qt//:QtGui",
++        "@qt//:QtNetwork",
++        "@qt//:QtQml",
++        "@qt//:QtQuick",
++    ],
++)
+diff --git a/examples/qml/referenceexamples/attached/BUILD b/examples/qml/referenceexamples/attached/BUILD
+new file mode 100644
+index 0000000000..4bb520c1d8
+--- /dev/null
++++ b/examples/qml/referenceexamples/attached/BUILD
+@@ -0,0 +1,30 @@
++load("@com_github_kklochkov_rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
++
++qt_qrc(
++    name = "data",
++    srcs = ["attached.qrc"],
++    data = ["example.qml"],
++)
++
++qt_cc_binary(
++    name = "attached",
++    srcs = [
++        "birthdayparty.cpp",
++        "main.cpp",
++        "person.cpp",
++    ],
++    moc_hdrs = [
++        "birthdayparty.h",
++        "person.h",
++    ],
++    qml_module_name = "People",
++    qrc_srcs = [":data"],
++    visibility = ["//visibility:public"],
++    deps = [
++        "@qt//:QtCore",
++        "@qt//:QtGui",
++        "@qt//:QtNetwork",
++        "@qt//:QtQml",
++        "@qt//:QtQuick",
++    ],
++)
+diff --git a/examples/qml/referenceexamples/binding/BUILD b/examples/qml/referenceexamples/binding/BUILD
+new file mode 100644
+index 0000000000..98141eb6a8
+--- /dev/null
++++ b/examples/qml/referenceexamples/binding/BUILD
+@@ -0,0 +1,32 @@
++load("@com_github_kklochkov_rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
++
++qt_qrc(
++    name = "data",
++    srcs = ["binding.qrc"],
++    data = ["example.qml"],
++)
++
++qt_cc_binary(
++    name = "binding",
++    srcs = [
++        "birthdayparty.cpp",
++        "happybirthdaysong.cpp",
++        "main.cpp",
++        "person.cpp",
++    ],
++    moc_hdrs = [
++        "birthdayparty.h",
++        "happybirthdaysong.h",
++        "person.h",
++    ],
++    qml_module_name = "People",
++    qrc_srcs = [":data"],
++    visibility = ["//visibility:public"],
++    deps = [
++        "@qt//:QtCore",
++        "@qt//:QtGui",
++        "@qt//:QtNetwork",
++        "@qt//:QtQml",
++        "@qt//:QtQuick",
++    ],
++)
+diff --git a/examples/qml/referenceexamples/coercion/BUILD b/examples/qml/referenceexamples/coercion/BUILD
+new file mode 100644
+index 0000000000..ec5d3b0db6
+--- /dev/null
++++ b/examples/qml/referenceexamples/coercion/BUILD
+@@ -0,0 +1,30 @@
++load("@com_github_kklochkov_rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
++
++qt_qrc(
++    name = "data",
++    srcs = ["coercion.qrc"],
++    data = ["example.qml"],
++)
++
++qt_cc_binary(
++    name = "coercion",
++    srcs = [
++        "birthdayparty.cpp",
++        "main.cpp",
++        "person.cpp",
++    ],
++    moc_hdrs = [
++        "birthdayparty.h",
++        "person.h",
++    ],
++    qml_module_name = "People",
++    qrc_srcs = [":data"],
++    visibility = ["//visibility:public"],
++    deps = [
++        "@qt//:QtCore",
++        "@qt//:QtGui",
++        "@qt//:QtNetwork",
++        "@qt//:QtQml",
++        "@qt//:QtQuick",
++    ],
++)
+diff --git a/examples/qml/referenceexamples/default/BUILD b/examples/qml/referenceexamples/default/BUILD
+new file mode 100644
+index 0000000000..84bfff74e1
+--- /dev/null
++++ b/examples/qml/referenceexamples/default/BUILD
+@@ -0,0 +1,30 @@
++load("@com_github_kklochkov_rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
++
++qt_qrc(
++    name = "data",
++    srcs = ["default.qrc"],
++    data = ["example.qml"],
++)
++
++qt_cc_binary(
++    name = "default",
++    srcs = [
++        "birthdayparty.cpp",
++        "main.cpp",
++        "person.cpp",
++    ],
++    moc_hdrs = [
++        "birthdayparty.h",
++        "person.h",
++    ],
++    qml_module_name = "People",
++    qrc_srcs = [":data"],
++    visibility = ["//visibility:public"],
++    deps = [
++        "@qt//:QtCore",
++        "@qt//:QtGui",
++        "@qt//:QtNetwork",
++        "@qt//:QtQml",
++        "@qt//:QtQuick",
++    ],
++)
+diff --git a/examples/qml/referenceexamples/extended/BUILD b/examples/qml/referenceexamples/extended/BUILD
+new file mode 100644
+index 0000000000..5bcfc23be6
+--- /dev/null
++++ b/examples/qml/referenceexamples/extended/BUILD
+@@ -0,0 +1,27 @@
++load("@com_github_kklochkov_rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
++
++qt_qrc(
++    name = "data",
++    srcs = ["extended.qrc"],
++    data = ["example.qml"],
++)
++
++qt_cc_binary(
++    name = "extended",
++    srcs = [
++        "lineedit.cpp",
++        "main.cpp",
++    ],
++    moc_hdrs = ["lineedit.h"],
++    qml_module_name = "People",
++    qrc_srcs = [":data"],
++    visibility = ["//visibility:public"],
++    deps = [
++        "@qt//:QtCore",
++        "@qt//:QtGui",
++        "@qt//:QtNetwork",
++        "@qt//:QtQml",
++        "@qt//:QtQuick",
++        "@qt//:QtWidgets",
++    ],
++)
+diff --git a/examples/qml/referenceexamples/grouped/BUILD b/examples/qml/referenceexamples/grouped/BUILD
+new file mode 100644
+index 0000000000..dad4d1ed7e
+--- /dev/null
++++ b/examples/qml/referenceexamples/grouped/BUILD
+@@ -0,0 +1,30 @@
++load("@com_github_kklochkov_rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
++
++qt_qrc(
++    name = "data",
++    srcs = ["grouped.qrc"],
++    data = ["example.qml"],
++)
++
++qt_cc_binary(
++    name = "grouped",
++    srcs = [
++        "birthdayparty.cpp",
++        "main.cpp",
++        "person.cpp",
++    ],
++    moc_hdrs = [
++        "birthdayparty.h",
++        "person.h",
++    ],
++    qml_module_name = "People",
++    qrc_srcs = [":data"],
++    visibility = ["//visibility:public"],
++    deps = [
++        "@qt//:QtCore",
++        "@qt//:QtGui",
++        "@qt//:QtNetwork",
++        "@qt//:QtQml",
++        "@qt//:QtQuick",
++    ],
++)
+diff --git a/examples/qml/referenceexamples/methods/BUILD b/examples/qml/referenceexamples/methods/BUILD
+new file mode 100644
+index 0000000000..c39cfcc8b3
+--- /dev/null
++++ b/examples/qml/referenceexamples/methods/BUILD
+@@ -0,0 +1,30 @@
++load("@com_github_kklochkov_rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
++
++qt_qrc(
++    name = "data",
++    srcs = ["methods.qrc"],
++    data = ["example.qml"],
++)
++
++qt_cc_binary(
++    name = "methods",
++    srcs = [
++        "birthdayparty.cpp",
++        "main.cpp",
++        "person.cpp",
++    ],
++    moc_hdrs = [
++        "birthdayparty.h",
++        "person.h",
++    ],
++    qml_module_name = "People",
++    qrc_srcs = [":data"],
++    visibility = ["//visibility:public"],
++    deps = [
++        "@qt//:QtCore",
++        "@qt//:QtGui",
++        "@qt//:QtNetwork",
++        "@qt//:QtQml",
++        "@qt//:QtQuick",
++    ],
++)
+diff --git a/examples/qml/referenceexamples/properties/BUILD b/examples/qml/referenceexamples/properties/BUILD
+new file mode 100644
+index 0000000000..f7dd837208
+--- /dev/null
++++ b/examples/qml/referenceexamples/properties/BUILD
+@@ -0,0 +1,30 @@
++load("@com_github_kklochkov_rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
++
++qt_qrc(
++    name = "data",
++    srcs = ["properties.qrc"],
++    data = ["example.qml"],
++)
++
++qt_cc_binary(
++    name = "properties",
++    srcs = [
++        "birthdayparty.cpp",
++        "main.cpp",
++        "person.cpp",
++    ],
++    moc_hdrs = [
++        "birthdayparty.h",
++        "person.h",
++    ],
++    qml_module_name = "People",
++    qrc_srcs = [":data"],
++    visibility = ["//visibility:public"],
++    deps = [
++        "@qt//:QtCore",
++        "@qt//:QtGui",
++        "@qt//:QtNetwork",
++        "@qt//:QtQml",
++        "@qt//:QtQuick",
++    ],
++)
+diff --git a/examples/qml/referenceexamples/signal/BUILD b/examples/qml/referenceexamples/signal/BUILD
+new file mode 100644
+index 0000000000..03f73ac067
+--- /dev/null
++++ b/examples/qml/referenceexamples/signal/BUILD
+@@ -0,0 +1,30 @@
++load("@com_github_kklochkov_rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
++
++qt_qrc(
++    name = "data",
++    srcs = ["signal.qrc"],
++    data = ["example.qml"],
++)
++
++qt_cc_binary(
++    name = "signal",
++    srcs = [
++        "birthdayparty.cpp",
++        "main.cpp",
++        "person.cpp",
++    ],
++    moc_hdrs = [
++        "birthdayparty.h",
++        "person.h",
++    ],
++    qml_module_name = "People",
++    qrc_srcs = [":data"],
++    visibility = ["//visibility:public"],
++    deps = [
++        "@qt//:QtCore",
++        "@qt//:QtGui",
++        "@qt//:QtNetwork",
++        "@qt//:QtQml",
++        "@qt//:QtQuick",
++    ],
++)
+diff --git a/examples/qml/referenceexamples/valuesource/BUILD b/examples/qml/referenceexamples/valuesource/BUILD
+new file mode 100644
+index 0000000000..4c63253564
+--- /dev/null
++++ b/examples/qml/referenceexamples/valuesource/BUILD
+@@ -0,0 +1,32 @@
++load("@com_github_kklochkov_rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
++
++qt_qrc(
++    name = "data",
++    srcs = ["valuesource.qrc"],
++    data = ["example.qml"],
++)
++
++qt_cc_binary(
++    name = "valuesource",
++    srcs = [
++        "birthdayparty.cpp",
++        "happybirthdaysong.cpp",
++        "main.cpp",
++        "person.cpp",
++    ],
++    moc_hdrs = [
++        "birthdayparty.h",
++        "happybirthdaysong.h",
++        "person.h",
++    ],
++    qml_module_name = "People",
++    qrc_srcs = [":data"],
++    visibility = ["//visibility:public"],
++    deps = [
++        "@qt//:QtCore",
++        "@qt//:QtGui",
++        "@qt//:QtNetwork",
++        "@qt//:QtQml",
++        "@qt//:QtQuick",
++    ],
++)
+diff --git a/examples/qml/shell/BUILD b/examples/qml/shell/BUILD
+new file mode 100644
+index 0000000000..627056622b
+--- /dev/null
++++ b/examples/qml/shell/BUILD
+@@ -0,0 +1,14 @@
++load("@com_github_kklochkov_rules_qt//qt:defs.bzl", "qt_cc_binary")
++
++qt_cc_binary(
++    name = "shell",
++    moc_srcs = ["main.cpp"],
++    visibility = ["//visibility:public"],
++    deps = [
++        "@qt//:QtCore",
++        "@qt//:QtGui",
++        "@qt//:QtNetwork",
++        "@qt//:QtQml",
++        "@qt//:QtQuick",
++    ],
++)
+diff --git a/examples/qml/tutorials/extending-qml/chapter1-basics/BUILD b/examples/qml/tutorials/extending-qml/chapter1-basics/BUILD
+new file mode 100644
+index 0000000000..4d94da770a
+--- /dev/null
++++ b/examples/qml/tutorials/extending-qml/chapter1-basics/BUILD
+@@ -0,0 +1,26 @@
++load("@com_github_kklochkov_rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
++
++qt_qrc(
++    name = "data",
++    srcs = ["chapter1-basics.qrc"],
++    data = ["app.qml"],
++)
++
++qt_cc_binary(
++    name = "chapter1-basics",
++    srcs = [
++        "main.cpp",
++        "piechart.cpp",
++    ],
++    moc_hdrs = ["piechart.h"],
++    qml_module_name = "Charts",
++    qrc_srcs = [":data"],
++    visibility = ["//visibility:public"],
++    deps = [
++        "@qt//:QtCore",
++        "@qt//:QtGui",
++        "@qt//:QtNetwork",
++        "@qt//:QtQml",
++        "@qt//:QtQuick",
++    ],
++)
+diff --git a/examples/qml/tutorials/extending-qml/chapter2-methods/BUILD b/examples/qml/tutorials/extending-qml/chapter2-methods/BUILD
+new file mode 100644
+index 0000000000..bed1dbdc2c
+--- /dev/null
++++ b/examples/qml/tutorials/extending-qml/chapter2-methods/BUILD
+@@ -0,0 +1,26 @@
++load("@com_github_kklochkov_rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
++
++qt_qrc(
++    name = "data",
++    srcs = ["chapter2-methods.qrc"],
++    data = ["app.qml"],
++)
++
++qt_cc_binary(
++    name = "chapter2-methods",
++    srcs = [
++        "main.cpp",
++        "piechart.cpp",
++    ],
++    moc_hdrs = ["piechart.h"],
++    qml_module_name = "Charts",
++    qrc_srcs = [":data"],
++    visibility = ["//visibility:public"],
++    deps = [
++        "@qt//:QtCore",
++        "@qt//:QtGui",
++        "@qt//:QtNetwork",
++        "@qt//:QtQml",
++        "@qt//:QtQuick",
++    ],
++)
+diff --git a/examples/qml/tutorials/extending-qml/chapter3-bindings/BUILD b/examples/qml/tutorials/extending-qml/chapter3-bindings/BUILD
+new file mode 100644
+index 0000000000..150cd41e63
+--- /dev/null
++++ b/examples/qml/tutorials/extending-qml/chapter3-bindings/BUILD
+@@ -0,0 +1,26 @@
++load("@com_github_kklochkov_rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
++
++qt_qrc(
++    name = "data",
++    srcs = ["chapter3-bindings.qrc"],
++    data = ["app.qml"],
++)
++
++qt_cc_binary(
++    name = "chapter3-bindings",
++    srcs = [
++        "main.cpp",
++        "piechart.cpp",
++    ],
++    moc_hdrs = ["piechart.h"],
++    qml_module_name = "Charts",
++    qrc_srcs = [":data"],
++    visibility = ["//visibility:public"],
++    deps = [
++        "@qt//:QtCore",
++        "@qt//:QtGui",
++        "@qt//:QtNetwork",
++        "@qt//:QtQml",
++        "@qt//:QtQuick",
++    ],
++)
+diff --git a/examples/qml/tutorials/extending-qml/chapter4-customPropertyTypes/BUILD b/examples/qml/tutorials/extending-qml/chapter4-customPropertyTypes/BUILD
+new file mode 100644
+index 0000000000..68dd6d02e2
+--- /dev/null
++++ b/examples/qml/tutorials/extending-qml/chapter4-customPropertyTypes/BUILD
+@@ -0,0 +1,30 @@
++load("@com_github_kklochkov_rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
++
++qt_qrc(
++    name = "data",
++    srcs = ["chapter4-customPropertyTypes.qrc"],
++    data = ["app.qml"],
++)
++
++qt_cc_binary(
++    name = "chapter4-customPropertyTypes",
++    srcs = [
++        "main.cpp",
++        "piechart.cpp",
++        "pieslice.cpp",
++    ],
++    moc_hdrs = [
++        "piechart.h",
++        "pieslice.h",
++    ],
++    qml_module_name = "Charts",
++    qrc_srcs = [":data"],
++    visibility = ["//visibility:public"],
++    deps = [
++        "@qt//:QtCore",
++        "@qt//:QtGui",
++        "@qt//:QtNetwork",
++        "@qt//:QtQml",
++        "@qt//:QtQuick",
++    ],
++)
+diff --git a/examples/qml/tutorials/extending-qml/chapter5-listproperties/BUILD b/examples/qml/tutorials/extending-qml/chapter5-listproperties/BUILD
+new file mode 100644
+index 0000000000..8da88622d1
+--- /dev/null
++++ b/examples/qml/tutorials/extending-qml/chapter5-listproperties/BUILD
+@@ -0,0 +1,30 @@
++load("@com_github_kklochkov_rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
++
++qt_qrc(
++    name = "data",
++    srcs = ["chapter5-listproperties.qrc"],
++    data = ["app.qml"],
++)
++
++qt_cc_binary(
++    name = "chapter5-listproperties",
++    srcs = [
++        "main.cpp",
++        "piechart.cpp",
++        "pieslice.cpp",
++    ],
++    moc_hdrs = [
++        "piechart.h",
++        "pieslice.h",
++    ],
++    qml_module_name = "Charts",
++    qrc_srcs = [":data"],
++    visibility = ["//visibility:public"],
++    deps = [
++        "@qt//:QtCore",
++        "@qt//:QtGui",
++        "@qt//:QtNetwork",
++        "@qt//:QtQml",
++        "@qt//:QtQuick",
++    ],
++)
+diff --git a/examples/qml/tutorials/extending-qml/chapter6-plugins/BUILD b/examples/qml/tutorials/extending-qml/chapter6-plugins/BUILD
+new file mode 100644
+index 0000000000..9551dd87c1
+--- /dev/null
++++ b/examples/qml/tutorials/extending-qml/chapter6-plugins/BUILD
+@@ -0,0 +1,35 @@
++load("@com_github_kklochkov_rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_cc_library", "qt_qrc")
++
++qt_cc_library(
++    name = "charts",
++    srcs = [
++        "import/piechart.cpp",
++        "import/pieslice.cpp",
++    ],
++    moc_hdrs = [
++        "import/piechart.h",
++        "import/pieslice.h",
++    ],
++    qml_module_name = "Charts",
++    deps = [
++        "@qt//:QtCore",
++        "@qt//:QtGui",
++        "@qt//:QtNetwork",
++        "@qt//:QtQml",
++        "@qt//:QtQuick",
++    ],
++)
++
++qt_qrc(
++    name = "data",
++    srcs = ["app.qrc"],
++    data = ["app.qml"],
++)
++
++qt_cc_binary(
++    name = "chapter6-plugins",
++    srcs = ["main.cpp"],
++    qrc_srcs = [":data"],
++    visibility = ["//visibility:public"],
++    deps = [":charts"],
++)
+diff --git a/examples/qml/xmlhttprequest/BUILD b/examples/qml/xmlhttprequest/BUILD
+new file mode 100644
+index 0000000000..8219f30106
+--- /dev/null
++++ b/examples/qml/xmlhttprequest/BUILD
+@@ -0,0 +1,26 @@
++load("@com_github_kklochkov_rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
++
++qt_qrc(
++    name = "data",
++    srcs = ["xmlhttprequest.qrc"],
++    data = glob([
++        "**/*.qml",
++        "**/*.js",
++        "**/*.xml",
++    ]),
++)
++
++qt_cc_binary(
++    name = "xmlhttprequest",
++    srcs = ["main.cpp"],
++    qrc_srcs = [":data"],
++    visibility = ["//visibility:public"],
++    deps = [
++        "//{root}/shared".format(root = package_name().replace("/qml/xmlhttprequest", "/quick")),
++        "@qt//:QtCore",
++        "@qt//:QtGui",
++        "@qt//:QtNetwork",
++        "@qt//:QtQml",
++        "@qt//:QtQuick",
++    ],
++)
+diff --git a/examples/quick/animation/BUILD b/examples/quick/animation/BUILD
+new file mode 100644
+index 0000000000..ef4bbae75b
+--- /dev/null
++++ b/examples/quick/animation/BUILD
+@@ -0,0 +1,25 @@
++load("@com_github_kklochkov_rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
++
++qt_qrc(
++    name = "data",
++    srcs = ["animation.qrc"],
++    data = glob([
++        "**/*.qml",
++        "**/*.png",
++    ]),
++)
++
++qt_cc_binary(
++    name = "animation",
++    srcs = ["main.cpp"],
++    qrc_srcs = [":data"],
++    visibility = ["//visibility:public"],
++    deps = [
++        "//{root}/shared".format(root = package_name().rstrip("/animation")),
++        "@qt//:QtCore",
++        "@qt//:QtGui",
++        "@qt//:QtNetwork",
++        "@qt//:QtQml",
++        "@qt//:QtQuick",
++    ],
++)
+diff --git a/examples/quick/canvas/BUILD b/examples/quick/canvas/BUILD
+new file mode 100644
+index 0000000000..fbcfd2c77c
+--- /dev/null
++++ b/examples/quick/canvas/BUILD
+@@ -0,0 +1,26 @@
++load("@com_github_kklochkov_rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
++
++qt_qrc(
++    name = "data",
++    srcs = ["canvas.qrc"],
++    data = glob([
++        "**/*.qml",
++        "**/*.png",
++        "**/*.js",
++    ]),
++)
++
++qt_cc_binary(
++    name = "canvas",
++    srcs = ["main.cpp"],
++    qrc_srcs = [":data"],
++    visibility = ["//visibility:public"],
++    deps = [
++        "//{root}/shared".format(root = package_name().rstrip("/canvas")),
++        "@qt//:QtCore",
++        "@qt//:QtGui",
++        "@qt//:QtNetwork",
++        "@qt//:QtQml",
++        "@qt//:QtQuick",
++    ],
++)
+diff --git a/examples/quick/customitems/dialcontrol/BUILD b/examples/quick/customitems/dialcontrol/BUILD
+new file mode 100644
+index 0000000000..d9c8c4ad37
+--- /dev/null
++++ b/examples/quick/customitems/dialcontrol/BUILD
+@@ -0,0 +1,26 @@
++load("@com_github_kklochkov_rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
++
++qt_qrc(
++    name = "data",
++    srcs = ["dialcontrol.qrc"],
++    data = glob([
++        "**/*.qml",
++        "**/*.png",
++        "**/*.js",
++    ]),
++)
++
++qt_cc_binary(
++    name = "dialcontrol",
++    srcs = ["main.cpp"],
++    qrc_srcs = [":data"],
++    visibility = ["//visibility:public"],
++    deps = [
++        "//{root}/shared".format(root = package_name().rstrip("/customitems/dialcontrol")),
++        "@qt//:QtCore",
++        "@qt//:QtGui",
++        "@qt//:QtNetwork",
++        "@qt//:QtQml",
++        "@qt//:QtQuick",
++    ],
++)
+diff --git a/examples/quick/customitems/flipable/BUILD b/examples/quick/customitems/flipable/BUILD
+new file mode 100644
+index 0000000000..d8131c17ba
+--- /dev/null
++++ b/examples/quick/customitems/flipable/BUILD
+@@ -0,0 +1,26 @@
++load("@com_github_kklochkov_rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
++
++qt_qrc(
++    name = "data",
++    srcs = ["flipable.qrc"],
++    data = glob([
++        "**/*.qml",
++        "**/*.png",
++        "**/*.js",
++    ]),
++)
++
++qt_cc_binary(
++    name = "flipable",
++    srcs = ["main.cpp"],
++    qrc_srcs = [":data"],
++    visibility = ["//visibility:public"],
++    deps = [
++        "//{root}/shared".format(root = package_name().rstrip("/customitems/flipable")),
++        "@qt//:QtCore",
++        "@qt//:QtGui",
++        "@qt//:QtNetwork",
++        "@qt//:QtQml",
++        "@qt//:QtQuick",
++    ],
++)
+diff --git a/examples/quick/customitems/maskedmousearea/BUILD b/examples/quick/customitems/maskedmousearea/BUILD
+new file mode 100644
+index 0000000000..230879cd9d
+--- /dev/null
++++ b/examples/quick/customitems/maskedmousearea/BUILD
+@@ -0,0 +1,30 @@
++load("@com_github_kklochkov_rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
++
++qt_qrc(
++    name = "data",
++    srcs = ["maskedmousearea.qrc"],
++    data = glob([
++        "**/*.qml",
++        "**/*.png",
++        "**/*.js",
++    ]),
++)
++
++qt_cc_binary(
++    name = "maskedmousearea",
++    srcs = [
++        "main.cpp",
++        "maskedmousearea.cpp",
++    ],
++    moc_hdrs = ["maskedmousearea.h"],
++    qml_module_name = "Example",
++    qrc_srcs = [":data"],
++    visibility = ["//visibility:public"],
++    deps = [
++        "@qt//:QtCore",
++        "@qt//:QtGui",
++        "@qt//:QtNetwork",
++        "@qt//:QtQml",
++        "@qt//:QtQuick",
++    ],
++)
+diff --git a/examples/quick/customitems/scrollbar/BUILD b/examples/quick/customitems/scrollbar/BUILD
+new file mode 100644
+index 0000000000..9cc6834181
+--- /dev/null
++++ b/examples/quick/customitems/scrollbar/BUILD
+@@ -0,0 +1,26 @@
++load("@com_github_kklochkov_rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
++
++qt_qrc(
++    name = "data",
++    srcs = ["scrollbar.qrc"],
++    data = glob([
++        "**/*.qml",
++        "**/*.png",
++        "**/*.jpg",
++    ]),
++)
++
++qt_cc_binary(
++    name = "scrollbar",
++    srcs = ["main.cpp"],
++    qrc_srcs = [":data"],
++    visibility = ["//visibility:public"],
++    deps = [
++        "//{root}/shared".format(root = package_name().rstrip("/customitems/scrollbar")),
++        "@qt//:QtCore",
++        "@qt//:QtGui",
++        "@qt//:QtNetwork",
++        "@qt//:QtQml",
++        "@qt//:QtQuick",
++    ],
++)
+diff --git a/examples/quick/customitems/searchbox/BUILD b/examples/quick/customitems/searchbox/BUILD
+new file mode 100644
+index 0000000000..157073040d
+--- /dev/null
++++ b/examples/quick/customitems/searchbox/BUILD
+@@ -0,0 +1,26 @@
++load("@com_github_kklochkov_rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
++
++qt_qrc(
++    name = "data",
++    srcs = ["searchbox.qrc"],
++    data = glob([
++        "**/*.qml",
++        "**/*.png",
++        "**/*.jpg",
++    ]),
++)
++
++qt_cc_binary(
++    name = "searchbox",
++    srcs = ["main.cpp"],
++    qrc_srcs = [":data"],
++    visibility = ["//visibility:public"],
++    deps = [
++        "//{root}/shared".format(root = package_name().rstrip("/customitems/searchbox")),
++        "@qt//:QtCore",
++        "@qt//:QtGui",
++        "@qt//:QtNetwork",
++        "@qt//:QtQml",
++        "@qt//:QtQuick",
++    ],
++)
+diff --git a/examples/quick/customitems/spinner/BUILD b/examples/quick/customitems/spinner/BUILD
+new file mode 100644
+index 0000000000..70e4993055
+--- /dev/null
++++ b/examples/quick/customitems/spinner/BUILD
+@@ -0,0 +1,26 @@
++load("@com_github_kklochkov_rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
++
++qt_qrc(
++    name = "data",
++    srcs = ["spinner.qrc"],
++    data = glob([
++        "**/*.qml",
++        "**/*.png",
++        "**/*.jpg",
++    ]),
++)
++
++qt_cc_binary(
++    name = "spinner",
++    srcs = ["main.cpp"],
++    qrc_srcs = [":data"],
++    visibility = ["//visibility:public"],
++    deps = [
++        "//{root}/shared".format(root = package_name().rstrip("/customitems/spinner")),
++        "@qt//:QtCore",
++        "@qt//:QtGui",
++        "@qt//:QtNetwork",
++        "@qt//:QtQml",
++        "@qt//:QtQuick",
++    ],
++)
+diff --git a/examples/quick/customitems/tabwidget/BUILD b/examples/quick/customitems/tabwidget/BUILD
+new file mode 100644
+index 0000000000..0d3f42d621
+--- /dev/null
++++ b/examples/quick/customitems/tabwidget/BUILD
+@@ -0,0 +1,26 @@
++load("@com_github_kklochkov_rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
++
++qt_qrc(
++    name = "data",
++    srcs = ["tabwidget.qrc"],
++    data = glob([
++        "**/*.qml",
++        "**/*.png",
++        "**/*.jpg",
++    ]),
++)
++
++qt_cc_binary(
++    name = "tabwidget",
++    srcs = ["main.cpp"],
++    qrc_srcs = [":data"],
++    visibility = ["//visibility:public"],
++    deps = [
++        "//{root}/shared".format(root = package_name().rstrip("/customitems/tabwidget")),
++        "@qt//:QtCore",
++        "@qt//:QtGui",
++        "@qt//:QtNetwork",
++        "@qt//:QtQml",
++        "@qt//:QtQuick",
++    ],
++)
+diff --git a/examples/quick/delegatechooser/BUILD b/examples/quick/delegatechooser/BUILD
+new file mode 100644
+index 0000000000..0f2b359a97
+--- /dev/null
++++ b/examples/quick/delegatechooser/BUILD
+@@ -0,0 +1,26 @@
++load("@com_github_kklochkov_rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
++
++qt_qrc(
++    name = "data",
++    srcs = ["qml.qrc"],
++    data = glob([
++        "**/*.qml",
++        "**/*.png",
++        "**/*.js",
++    ]),
++)
++
++qt_cc_binary(
++    name = "delegatechooser",
++    srcs = ["main.cpp"],
++    qrc_srcs = [":data"],
++    visibility = ["//visibility:public"],
++    deps = [
++        "//{root}/shared".format(root = package_name().rstrip("/delegatechooser")),
++        "@qt//:QtCore",
++        "@qt//:QtGui",
++        "@qt//:QtNetwork",
++        "@qt//:QtQml",
++        "@qt//:QtQuick",
++    ],
++)
+diff --git a/examples/quick/draganddrop/BUILD b/examples/quick/draganddrop/BUILD
+new file mode 100644
+index 0000000000..816448e2e8
+--- /dev/null
++++ b/examples/quick/draganddrop/BUILD
+@@ -0,0 +1,26 @@
++load("@com_github_kklochkov_rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
++
++qt_qrc(
++    name = "data",
++    srcs = ["draganddrop.qrc"],
++    data = glob([
++        "**/*.qml",
++        "**/*.png",
++        "**/*.js",
++    ]),
++)
++
++qt_cc_binary(
++    name = "draganddrop",
++    srcs = ["main.cpp"],
++    qrc_srcs = [":data"],
++    visibility = ["//visibility:public"],
++    deps = [
++        "//{root}/shared".format(root = package_name().rstrip("/draganddrop")),
++        "@qt//:QtCore",
++        "@qt//:QtGui",
++        "@qt//:QtNetwork",
++        "@qt//:QtQml",
++        "@qt//:QtQuick",
++    ],
++)
+diff --git a/examples/quick/embeddedinwidgets/BUILD b/examples/quick/embeddedinwidgets/BUILD
+new file mode 100644
+index 0000000000..1ec2cf8970
+--- /dev/null
++++ b/examples/quick/embeddedinwidgets/BUILD
+@@ -0,0 +1,25 @@
++load("@com_github_kklochkov_rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
++
++qt_qrc(
++    name = "data",
++    srcs = ["embeddedinwidgets.qrc"],
++    data = glob([
++        "**/*.qml",
++        "**/*.qsb",
++    ]),
++)
++
++qt_cc_binary(
++    name = "embeddedinwidgets",
++    moc_srcs = ["main.cpp"],
++    qrc_srcs = [":data"],
++    visibility = ["//visibility:public"],
++    deps = [
++        "@qt//:QtCore",
++        "@qt//:QtGui",
++        "@qt//:QtNetwork",
++        "@qt//:QtQml",
++        "@qt//:QtQuick",
++        "@qt//:QtWidgets",
++    ],
++)
+diff --git a/examples/quick/externaldraganddrop/BUILD b/examples/quick/externaldraganddrop/BUILD
+new file mode 100644
+index 0000000000..0958062291
+--- /dev/null
++++ b/examples/quick/externaldraganddrop/BUILD
+@@ -0,0 +1,26 @@
++load("@com_github_kklochkov_rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
++
++qt_qrc(
++    name = "data",
++    srcs = ["externaldraganddrop.qrc"],
++    data = glob([
++        "**/*.qml",
++        "**/*.png",
++        "**/*.js",
++    ]),
++)
++
++qt_cc_binary(
++    name = "externaldraganddrop",
++    srcs = ["main.cpp"],
++    qrc_srcs = [":data"],
++    visibility = ["//visibility:public"],
++    deps = [
++        "//{root}/shared".format(root = package_name().rstrip("/externaldraganddrop")),
++        "@qt//:QtCore",
++        "@qt//:QtGui",
++        "@qt//:QtNetwork",
++        "@qt//:QtQml",
++        "@qt//:QtQuick",
++    ],
++)
+diff --git a/examples/quick/imageelements/BUILD b/examples/quick/imageelements/BUILD
+new file mode 100644
+index 0000000000..29d4f6c51f
+--- /dev/null
++++ b/examples/quick/imageelements/BUILD
+@@ -0,0 +1,25 @@
++load("@com_github_kklochkov_rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
++
++qt_qrc(
++    name = "data",
++    srcs = ["imageelements.qrc"],
++    data = glob([
++        "content/*",
++        "**/*.qml",
++    ]),
++)
++
++qt_cc_binary(
++    name = "imageelements",
++    srcs = ["main.cpp"],
++    qrc_srcs = [":data"],
++    visibility = ["//visibility:public"],
++    deps = [
++        "//{root}/shared".format(root = package_name().rstrip("/imageelements")),
++        "@qt//:QtCore",
++        "@qt//:QtGui",
++        "@qt//:QtNetwork",
++        "@qt//:QtQml",
++        "@qt//:QtQuick",
++    ],
++)
+diff --git a/examples/quick/keyinteraction/BUILD b/examples/quick/keyinteraction/BUILD
+new file mode 100644
+index 0000000000..6966f39771
+--- /dev/null
++++ b/examples/quick/keyinteraction/BUILD
+@@ -0,0 +1,26 @@
++load("@com_github_kklochkov_rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
++
++qt_qrc(
++    name = "data",
++    srcs = ["keyinteraction.qrc"],
++    data = glob([
++        "**/*.qml",
++        "**/*.png",
++        "**/*.js",
++    ]),
++)
++
++qt_cc_binary(
++    name = "keyinteraction",
++    srcs = ["main.cpp"],
++    qrc_srcs = [":data"],
++    visibility = ["//visibility:public"],
++    deps = [
++        "//{root}/shared".format(root = package_name().replace("/keyinteraction", "")),
++        "@qt//:QtCore",
++        "@qt//:QtGui",
++        "@qt//:QtNetwork",
++        "@qt//:QtQml",
++        "@qt//:QtQuick",
++    ],
++)
+diff --git a/examples/quick/layouts/BUILD b/examples/quick/layouts/BUILD
+new file mode 100644
+index 0000000000..b981a6dcc7
+--- /dev/null
++++ b/examples/quick/layouts/BUILD
+@@ -0,0 +1,23 @@
++load("@com_github_kklochkov_rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
++
++qt_qrc(
++    name = "data",
++    srcs = ["layouts.qrc"],
++    data = glob([
++        "**/*.qml",
++    ]),
++)
++
++qt_cc_binary(
++    name = "layouts",
++    srcs = ["main.cpp"],
++    qrc_srcs = [":data"],
++    visibility = ["//visibility:public"],
++    deps = [
++        "@qt//:QtCore",
++        "@qt//:QtGui",
++        "@qt//:QtNetwork",
++        "@qt//:QtQml",
++        "@qt//:QtQuick",
++    ],
++)
+diff --git a/examples/quick/localstorage/localstorage/BUILD b/examples/quick/localstorage/localstorage/BUILD
+new file mode 100644
+index 0000000000..b9caa274e9
+--- /dev/null
++++ b/examples/quick/localstorage/localstorage/BUILD
+@@ -0,0 +1,24 @@
++load("@com_github_kklochkov_rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
++
++qt_qrc(
++    name = "data",
++    srcs = ["localstorage.qrc"],
++    data = glob([
++        "**/*.qml",
++        "**/*.js",
++    ]),
++)
++
++qt_cc_binary(
++    name = "localstorage",
++    srcs = ["main.cpp"],
++    qrc_srcs = [":data"],
++    visibility = ["//visibility:public"],
++    deps = [
++        "@qt//:QtCore",
++        "@qt//:QtGui",
++        "@qt//:QtNetwork",
++        "@qt//:QtQml",
++        "@qt//:QtQuick",
++    ],
++)
+diff --git a/examples/quick/models/abstractitemmodel/BUILD b/examples/quick/models/abstractitemmodel/BUILD
+new file mode 100644
+index 0000000000..eae3687285
+--- /dev/null
++++ b/examples/quick/models/abstractitemmodel/BUILD
+@@ -0,0 +1,28 @@
++load("@com_github_kklochkov_rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
++
++qt_qrc(
++    name = "data",
++    srcs = ["abstractitemmodel.qrc"],
++    data = glob([
++        "**/*.qml",
++        "**/*.js",
++    ]),
++)
++
++qt_cc_binary(
++    name = "abstractitemmodel",
++    srcs = [
++        "main.cpp",
++        "model.cpp",
++    ],
++    moc_hdrs = ["model.h"],
++    qrc_srcs = [":data"],
++    visibility = ["//visibility:public"],
++    deps = [
++        "@qt//:QtCore",
++        "@qt//:QtGui",
++        "@qt//:QtNetwork",
++        "@qt//:QtQml",
++        "@qt//:QtQuick",
++    ],
++)
+diff --git a/examples/quick/models/objectlistmodel/BUILD b/examples/quick/models/objectlistmodel/BUILD
+new file mode 100644
+index 0000000000..73da6c236b
+--- /dev/null
++++ b/examples/quick/models/objectlistmodel/BUILD
+@@ -0,0 +1,28 @@
++load("@com_github_kklochkov_rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
++
++qt_qrc(
++    name = "data",
++    srcs = ["objectlistmodel.qrc"],
++    data = glob([
++        "**/*.qml",
++        "**/*.js",
++    ]),
++)
++
++qt_cc_binary(
++    name = "objectlistmodel",
++    srcs = [
++        "dataobject.cpp",
++        "main.cpp",
++    ],
++    moc_hdrs = ["dataobject.h"],
++    qrc_srcs = [":data"],
++    visibility = ["//visibility:public"],
++    deps = [
++        "@qt//:QtCore",
++        "@qt//:QtGui",
++        "@qt//:QtNetwork",
++        "@qt//:QtQml",
++        "@qt//:QtQuick",
++    ],
++)
+diff --git a/examples/quick/models/stringlistmodel/BUILD b/examples/quick/models/stringlistmodel/BUILD
+new file mode 100644
+index 0000000000..611817f14c
+--- /dev/null
++++ b/examples/quick/models/stringlistmodel/BUILD
+@@ -0,0 +1,24 @@
++load("@com_github_kklochkov_rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
++
++qt_qrc(
++    name = "data",
++    srcs = ["stringlistmodel.qrc"],
++    data = glob([
++        "**/*.qml",
++        "**/*.png",
++    ]),
++)
++
++qt_cc_binary(
++    name = "stringlistmodel",
++    srcs = ["main.cpp"],
++    qrc_srcs = [":data"],
++    visibility = ["//visibility:public"],
++    deps = [
++        "@qt//:QtCore",
++        "@qt//:QtGui",
++        "@qt//:QtNetwork",
++        "@qt//:QtQml",
++        "@qt//:QtQuick",
++    ],
++)
+diff --git a/examples/quick/mousearea/BUILD b/examples/quick/mousearea/BUILD
+new file mode 100644
+index 0000000000..9070c0658a
+--- /dev/null
++++ b/examples/quick/mousearea/BUILD
+@@ -0,0 +1,26 @@
++load("@com_github_kklochkov_rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
++
++qt_qrc(
++    name = "data",
++    srcs = ["mousearea.qrc"],
++    data = glob([
++        "**/*.qml",
++        "**/*.png",
++        "**/*.js",
++    ]),
++)
++
++qt_cc_binary(
++    name = "mousearea",
++    srcs = ["main.cpp"],
++    qrc_srcs = [":data"],
++    visibility = ["//visibility:public"],
++    deps = [
++        "//{root}/shared".format(root = package_name().rstrip("/mousearea")),
++        "@qt//:QtCore",
++        "@qt//:QtGui",
++        "@qt//:QtNetwork",
++        "@qt//:QtQml",
++        "@qt//:QtQuick",
++    ],
++)
+diff --git a/examples/quick/particles/BUILD b/examples/quick/particles/BUILD
+new file mode 100644
+index 0000000000..7192a7245c
+--- /dev/null
++++ b/examples/quick/particles/BUILD
+@@ -0,0 +1,17 @@
++load("@com_github_kklochkov_rules_qt//qt:defs.bzl", "qt_cc_library", "qt_qrc")
++
++package(default_visibility = ["//visibility:public"])
++
++qt_qrc(
++    name = "data",
++    srcs = ["images.qrc"],
++    data = glob([
++        "images/*.png",
++        "images/*.jpg",
++    ]),
++)
++
++qt_cc_library(
++    name = "images",
++    qrc_srcs = [":data"],
++)
+diff --git a/examples/quick/particles/affectors/BUILD b/examples/quick/particles/affectors/BUILD
+new file mode 100644
+index 0000000000..706f0e9834
+--- /dev/null
++++ b/examples/quick/particles/affectors/BUILD
+@@ -0,0 +1,28 @@
++load("@com_github_kklochkov_rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
++
++qt_qrc(
++    name = "data",
++    srcs = ["affectors.qrc"],
++    data = glob([
++        "**/*.qml",
++        "**/*.png",
++        "**/*.js",
++        "**/*.jpg",
++    ]),
++)
++
++qt_cc_binary(
++    name = "affectors",
++    srcs = ["main.cpp"],
++    qrc_srcs = [":data"],
++    visibility = ["//visibility:public"],
++    deps = [
++        "//{root}/shared".format(root = package_name().rstrip("/particles/affectors")),
++        "//{root}:images".format(root = package_name().replace("/affectors", "")),
++        "@qt//:QtCore",
++        "@qt//:QtGui",
++        "@qt//:QtNetwork",
++        "@qt//:QtQml",
++        "@qt//:QtQuick",
++    ],
++)
+diff --git a/examples/quick/particles/customparticle/BUILD b/examples/quick/particles/customparticle/BUILD
+new file mode 100644
+index 0000000000..f23bab4df6
+--- /dev/null
++++ b/examples/quick/particles/customparticle/BUILD
+@@ -0,0 +1,27 @@
++load("@com_github_kklochkov_rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
++
++qt_qrc(
++    name = "data",
++    srcs = ["customparticle.qrc"],
++    data = glob([
++        "**/*.qml",
++        "**/*.png",
++        "**/*.js",
++    ]),
++)
++
++qt_cc_binary(
++    name = "customparticle",
++    srcs = ["main.cpp"],
++    qrc_srcs = [":data"],
++    visibility = ["//visibility:public"],
++    deps = [
++        "//{root}/shared".format(root = package_name().rstrip("/particles/customparticle")),
++        "//{root}:images".format(root = package_name().replace("/customparticle", "")),
++        "@qt//:QtCore",
++        "@qt//:QtGui",
++        "@qt//:QtNetwork",
++        "@qt//:QtQml",
++        "@qt//:QtQuick",
++    ],
++)
+diff --git a/examples/quick/particles/emitters/BUILD b/examples/quick/particles/emitters/BUILD
+new file mode 100644
+index 0000000000..6230cc1ce0
+--- /dev/null
++++ b/examples/quick/particles/emitters/BUILD
+@@ -0,0 +1,27 @@
++load("@com_github_kklochkov_rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
++
++qt_qrc(
++    name = "data",
++    srcs = ["emitters.qrc"],
++    data = glob([
++        "**/*.qml",
++        "**/*.png",
++        "**/*.js",
++    ]),
++)
++
++qt_cc_binary(
++    name = "emitters",
++    srcs = ["main.cpp"],
++    qrc_srcs = [":data"],
++    visibility = ["//visibility:public"],
++    deps = [
++        "//{root}/shared".format(root = package_name().rstrip("/particles/emitters")),
++        "//{root}:images".format(root = package_name().replace("/emitters", "")),
++        "@qt//:QtCore",
++        "@qt//:QtGui",
++        "@qt//:QtNetwork",
++        "@qt//:QtQml",
++        "@qt//:QtQuick",
++    ],
++)
+diff --git a/examples/quick/particles/imageparticle/BUILD b/examples/quick/particles/imageparticle/BUILD
+new file mode 100644
+index 0000000000..efe0105d70
+--- /dev/null
++++ b/examples/quick/particles/imageparticle/BUILD
+@@ -0,0 +1,27 @@
++load("@com_github_kklochkov_rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
++
++qt_qrc(
++    name = "data",
++    srcs = ["imageparticle.qrc"],
++    data = glob([
++        "**/*.qml",
++        "**/*.png",
++        "**/*.js",
++    ]),
++)
++
++qt_cc_binary(
++    name = "imageparticle",
++    srcs = ["main.cpp"],
++    qrc_srcs = [":data"],
++    visibility = ["//visibility:public"],
++    deps = [
++        "//{root}/shared".format(root = package_name().rstrip("/particles/imageparticle")),
++        "//{root}:images".format(root = package_name().replace("/imageparticle", "")),
++        "@qt//:QtCore",
++        "@qt//:QtGui",
++        "@qt//:QtNetwork",
++        "@qt//:QtQml",
++        "@qt//:QtQuick",
++    ],
++)
+diff --git a/examples/quick/particles/itemparticle/BUILD b/examples/quick/particles/itemparticle/BUILD
+new file mode 100644
+index 0000000000..dfb9c5c066
+--- /dev/null
++++ b/examples/quick/particles/itemparticle/BUILD
+@@ -0,0 +1,27 @@
++load("@com_github_kklochkov_rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
++
++qt_qrc(
++    name = "data",
++    srcs = ["itemparticle.qrc"],
++    data = glob([
++        "**/*.qml",
++        "**/*.png",
++        "**/*.js",
++    ]),
++)
++
++qt_cc_binary(
++    name = "itemparticle",
++    srcs = ["main.cpp"],
++    qrc_srcs = [":data"],
++    visibility = ["//visibility:public"],
++    deps = [
++        "//{root}/shared".format(root = package_name().rstrip("/particles/itemparticle")),
++        "//{root}:images".format(root = package_name().replace("/itemparticle", "")),
++        "@qt//:QtCore",
++        "@qt//:QtGui",
++        "@qt//:QtNetwork",
++        "@qt//:QtQml",
++        "@qt//:QtQuick",
++    ],
++)
+diff --git a/examples/quick/particles/itemparticle/itemparticle.qrc b/examples/quick/particles/itemparticle/itemparticle.qrc
+new file mode 100644
+index 0000000000..b43412744e
+--- /dev/null
++++ b/examples/quick/particles/itemparticle/itemparticle.qrc
+@@ -0,0 +1,11 @@
++<RCC>
++    <qresource>
++        <file>particleview.qml</file>
++        <file>delegates.qml</file>
++        <file>content/script.js</file>
++        <file>content/bubble.png</file>
++        <file>content/Delegate.qml</file>
++        <file>content/Delegate2.qml</file>
++        <file>content/ExpandingDelegate.qml</file>
++    </qresource>
++</RCC>
+diff --git a/examples/quick/particles/system/BUILD b/examples/quick/particles/system/BUILD
+new file mode 100644
+index 0000000000..31b5aeaa56
+--- /dev/null
++++ b/examples/quick/particles/system/BUILD
+@@ -0,0 +1,27 @@
++load("@com_github_kklochkov_rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
++
++qt_qrc(
++    name = "data",
++    srcs = ["system.qrc"],
++    data = glob([
++        "**/*.qml",
++        "**/*.png",
++        "**/*.js",
++    ]),
++)
++
++qt_cc_binary(
++    name = "system",
++    srcs = ["main.cpp"],
++    qrc_srcs = [":data"],
++    visibility = ["//visibility:public"],
++    deps = [
++        "//{root}/shared".format(root = package_name().rstrip("/particles/system")),
++        "//{root}:images".format(root = package_name().replace("/system", "")),
++        "@qt//:QtCore",
++        "@qt//:QtGui",
++        "@qt//:QtNetwork",
++        "@qt//:QtQml",
++        "@qt//:QtQuick",
++    ],
++)
+diff --git a/examples/quick/positioners/BUILD b/examples/quick/positioners/BUILD
+new file mode 100644
+index 0000000000..2bacef95c6
+--- /dev/null
++++ b/examples/quick/positioners/BUILD
+@@ -0,0 +1,26 @@
++load("@com_github_kklochkov_rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
++
++qt_qrc(
++    name = "data",
++    srcs = ["positioners.qrc"],
++    data = glob([
++        "**/*.qml",
++        "**/*.png",
++        "**/*.js",
++    ]),
++)
++
++qt_cc_binary(
++    name = "positioners",
++    srcs = ["main.cpp"],
++    qrc_srcs = [":data"],
++    visibility = ["//visibility:public"],
++    deps = [
++        "//{root}/shared".format(root = package_name().rstrip("/positioners")),
++        "@qt//:QtCore",
++        "@qt//:QtGui",
++        "@qt//:QtNetwork",
++        "@qt//:QtQml",
++        "@qt//:QtQuick",
++    ],
++)
+diff --git a/examples/quick/quick-accessibility/BUILD b/examples/quick/quick-accessibility/BUILD
+new file mode 100644
+index 0000000000..4ced2c4f14
+--- /dev/null
++++ b/examples/quick/quick-accessibility/BUILD
+@@ -0,0 +1,26 @@
++load("@com_github_kklochkov_rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
++
++qt_qrc(
++    name = "data",
++    srcs = ["accessibility.qrc"],
++    data = glob([
++        "**/*.qml",
++        "**/*.png",
++        "**/*.js",
++    ]),
++)
++
++qt_cc_binary(
++    name = "accessibility",
++    srcs = ["main.cpp"],
++    qrc_srcs = [":data"],
++    visibility = ["//visibility:public"],
++    deps = [
++        "//{root}/shared".format(root = package_name().replace("/quick-accessibility", "")),
++        "@qt//:QtCore",
++        "@qt//:QtGui",
++        "@qt//:QtNetwork",
++        "@qt//:QtQml",
++        "@qt//:QtQuick",
++    ],
++)
+diff --git a/examples/quick/quickwidgets/qquickviewcomparison/BUILD b/examples/quick/quickwidgets/qquickviewcomparison/BUILD
+new file mode 100644
+index 0000000000..d4e5a0dfa7
+--- /dev/null
++++ b/examples/quick/quickwidgets/qquickviewcomparison/BUILD
+@@ -0,0 +1,38 @@
++load("@com_github_kklochkov_rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
++
++qt_qrc(
++    name = "data",
++    srcs = ["qquickviewcomparison.qrc"],
++    data = glob([
++        "**/*.qml",
++        "**/*.png",
++        "**/*.js",
++        "**/*.qsb",
++    ]),
++)
++
++qt_cc_binary(
++    name = "qquickviewcomparison",
++    srcs = [
++        "fbitem.cpp",
++        "logo.cpp",
++        "logo.h",
++        "main.cpp",
++        "mainwindow.cpp",
++        "mainwindow.h",
++    ],
++    moc_hdrs = ["fbitem.h"],
++    qml_module_name = "fbitem",
++    qrc_srcs = [":data"],
++    visibility = ["//visibility:public"],
++    deps = [
++        "@qt//:QtCore",
++        "@qt//:QtGui",
++        "@qt//:QtNetwork",
++        "@qt//:QtOpenGL",
++        "@qt//:QtQml",
++        "@qt//:QtQuick",
++        "@qt//:QtQuickWidgets",
++        "@qt//:QtWidgets",
++    ],
++)
+diff --git a/examples/quick/quickwidgets/quickwidget/BUILD b/examples/quick/quickwidgets/quickwidget/BUILD
+new file mode 100644
+index 0000000000..6e8ae3f262
+--- /dev/null
++++ b/examples/quick/quickwidgets/quickwidget/BUILD
+@@ -0,0 +1,30 @@
++load("@com_github_kklochkov_rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
++
++qt_qrc(
++    name = "data",
++    srcs = ["quickwidget.qrc"],
++    data = glob([
++        "**/*.qml",
++        "**/*.png",
++        "**/*.js",
++    ]),
++)
++
++qt_cc_binary(
++    name = "quickwidget",
++    srcs = ["fbitem.cpp"],
++    moc_hdrs = ["fbitem.h"],
++    moc_srcs = ["main.cpp"],
++    qml_module_name = "fbitem",
++    qrc_srcs = [":data"],
++    visibility = ["//visibility:public"],
++    deps = [
++        "@qt//:QtCore",
++        "@qt//:QtGui",
++        "@qt//:QtNetwork",
++        "@qt//:QtQml",
++        "@qt//:QtQuick",
++        "@qt//:QtQuickWidgets",
++        "@qt//:QtWidgets",
++    ],
++)
+diff --git a/examples/quick/rendercontrol/BUILD b/examples/quick/rendercontrol/BUILD
+new file mode 100644
+index 0000000000..59c0f85974
+--- /dev/null
++++ b/examples/quick/rendercontrol/BUILD
+@@ -0,0 +1,36 @@
++load("@com_github_kklochkov_rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
++
++qt_qrc(
++    name = "data",
++    srcs = ["rendercontrol.qrc"],
++    data = glob([
++        "**/*.qml",
++        "**/*.png",
++        "**/*.js",
++    ]),
++)
++
++qt_cc_binary(
++    name = "rendercontrol",
++    srcs = [
++        "cuberenderer.cpp",
++        "cuberenderer.h",
++        "main.cpp",
++        "window_multithreaded.cpp",
++        "window_singlethreaded.cpp",
++    ],
++    moc_hdrs = [
++        "window_singlethreaded.h",
++        "window_multithreaded.h",
++    ],
++    qrc_srcs = [":data"],
++    visibility = ["//visibility:public"],
++    deps = [
++        "@qt//:QtCore",
++        "@qt//:QtGui",
++        "@qt//:QtNetwork",
++        "@qt//:QtOpenGL",
++        "@qt//:QtQml",
++        "@qt//:QtQuick",
++    ],
++)
+diff --git a/examples/quick/righttoleft/BUILD b/examples/quick/righttoleft/BUILD
+new file mode 100644
+index 0000000000..317c804668
+--- /dev/null
++++ b/examples/quick/righttoleft/BUILD
+@@ -0,0 +1,26 @@
++load("@com_github_kklochkov_rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
++
++qt_qrc(
++    name = "data",
++    srcs = ["righttoleft.qrc"],
++    data = glob([
++        "**/*.qml",
++        "**/*.png",
++        "**/*.js",
++    ]),
++)
++
++qt_cc_binary(
++    name = "righttoleft",
++    srcs = ["main.cpp"],
++    qrc_srcs = [":data"],
++    visibility = ["//visibility:public"],
++    deps = [
++        "//{root}/shared".format(root = package_name().rstrip("/righttoleft")),
++        "@qt//:QtCore",
++        "@qt//:QtGui",
++        "@qt//:QtNetwork",
++        "@qt//:QtQml",
++        "@qt//:QtQuick",
++    ],
++)
+diff --git a/examples/quick/scenegraph/customgeometry/BUILD b/examples/quick/scenegraph/customgeometry/BUILD
+new file mode 100644
+index 0000000000..68fd43d90b
+--- /dev/null
++++ b/examples/quick/scenegraph/customgeometry/BUILD
+@@ -0,0 +1,30 @@
++load("@com_github_kklochkov_rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
++
++qt_qrc(
++    name = "data",
++    srcs = ["customgeometry.qrc"],
++    data = glob([
++        "**/*.qml",
++    ]),
++)
++
++qt_cc_binary(
++    name = "customgeometry",
++    srcs = [
++        "beziercurve.cpp",
++        "main.cpp",
++    ],
++    moc_hdrs = ["beziercurve.h"],
++    qml_module_name = "CustomGeometry",
++    qrc_srcs = [":data"],
++    visibility = ["//visibility:public"],
++    deps = [
++        "@qt//:QtCore",
++        "@qt//:QtGui",
++        "@qt//:QtNetwork",
++        "@qt//:QtOpenGL",
++        "@qt//:QtQml",
++        "@qt//:QtQmlModels",
++        "@qt//:QtQuick",
++    ],
++)
+diff --git a/examples/quick/scenegraph/fboitem/BUILD b/examples/quick/scenegraph/fboitem/BUILD
+new file mode 100644
+index 0000000000..0e326e04ac
+--- /dev/null
++++ b/examples/quick/scenegraph/fboitem/BUILD
+@@ -0,0 +1,32 @@
++load("@com_github_kklochkov_rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
++
++qt_qrc(
++    name = "data",
++    srcs = ["fboitem.qrc"],
++    data = glob([
++        "**/*.qml",
++        "**/*.frag",
++    ]),
++)
++
++qt_cc_binary(
++    name = "fboitem",
++    srcs = [
++        "fboinsgrenderer.cpp",
++        "main.cpp",
++    ],
++    moc_hdrs = ["fboinsgrenderer.h"],
++    qml_module_name = "SceneGraphRendering",
++    qrc_srcs = [":data"],
++    visibility = ["//visibility:public"],
++    deps = [
++        "//{root}/shared".format(root = package_name().rstrip("/fboitem")),
++        "@qt//:QtCore",
++        "@qt//:QtGui",
++        "@qt//:QtNetwork",
++        "@qt//:QtOpenGL",
++        "@qt//:QtQml",
++        "@qt//:QtQmlModels",
++        "@qt//:QtQuick",
++    ],
++)
+diff --git a/examples/quick/scenegraph/graph/BUILD b/examples/quick/scenegraph/graph/BUILD
+new file mode 100644
+index 0000000000..1f1b76da4c
+--- /dev/null
++++ b/examples/quick/scenegraph/graph/BUILD
+@@ -0,0 +1,38 @@
++load("@com_github_kklochkov_rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
++
++qt_qrc(
++    name = "data",
++    srcs = ["graph.qrc"],
++    data = glob([
++        "**/*.qml",
++        "**/*.fsh",
++        "**/*.vsh",
++    ]),
++)
++
++qt_cc_binary(
++    name = "graph",
++    srcs = [
++        "graph.cpp",
++        "gridnode.cpp",
++        "gridnode.h",
++        "linenode.cpp",
++        "linenode.h",
++        "main.cpp",
++        "noisynode.cpp",
++        "noisynode.h",
++    ],
++    moc_hdrs = ["graph.h"],
++    qml_module_name = "Graph",
++    qrc_srcs = [":data"],
++    visibility = ["//visibility:public"],
++    deps = [
++        "@qt//:QtCore",
++        "@qt//:QtGui",
++        "@qt//:QtNetwork",
++        "@qt//:QtOpenGL",
++        "@qt//:QtQml",
++        "@qt//:QtQmlModels",
++        "@qt//:QtQuick",
++    ],
++)
+diff --git a/examples/quick/scenegraph/openglunderqml/BUILD b/examples/quick/scenegraph/openglunderqml/BUILD
+new file mode 100644
+index 0000000000..5403388a5a
+--- /dev/null
++++ b/examples/quick/scenegraph/openglunderqml/BUILD
+@@ -0,0 +1,31 @@
++load("@com_github_kklochkov_rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
++
++qt_qrc(
++    name = "data",
++    srcs = ["openglunderqml.qrc"],
++    data = glob([
++        "**/*.qml",
++        "**/*.qsb",
++    ]),
++)
++
++qt_cc_binary(
++    name = "openglunderqml",
++    srcs = [
++        "main.cpp",
++        "squircle.cpp",
++    ],
++    moc_hdrs = ["squircle.h"],
++    qml_module_name = "OpenGLUnderQML",
++    qrc_srcs = [":data"],
++    visibility = ["//visibility:public"],
++    deps = [
++        "@qt//:QtCore",
++        "@qt//:QtGui",
++        "@qt//:QtNetwork",
++        "@qt//:QtOpenGL",
++        "@qt//:QtQml",
++        "@qt//:QtQmlModels",
++        "@qt//:QtQuick",
++    ],
++)
+diff --git a/examples/quick/scenegraph/sgengine/BUILD b/examples/quick/scenegraph/sgengine/BUILD
+new file mode 100644
+index 0000000000..e1e9bb189c
+--- /dev/null
++++ b/examples/quick/scenegraph/sgengine/BUILD
+@@ -0,0 +1,30 @@
++load("@com_github_kklochkov_rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
++
++qt_qrc(
++    name = "data",
++    srcs = ["sgengine.qrc"],
++    data = glob([
++        "**/*.png",
++    ]),
++)
++
++qt_cc_binary(
++    name = "sgengine",
++    srcs = [
++        "main.cpp",
++        "window.cpp",
++    ],
++    moc_hdrs = ["window.h"],
++    qrc_srcs = [":data"],
++    visibility = ["//visibility:public"],
++    deps = [
++        "//{root}/shared".format(root = package_name().rstrip("/scenegraph/sgengine")),
++        "@qt//:QtCore",
++        "@qt//:QtGui",
++        "@qt//:QtNetwork",
++        "@qt//:QtOpenGL",
++        "@qt//:QtQml",
++        "@qt//:QtQmlModels",
++        "@qt//:QtQuick",
++    ],
++)
+diff --git a/examples/quick/scenegraph/shared/BUILD b/examples/quick/scenegraph/shared/BUILD
+new file mode 100644
+index 0000000000..e0a1caa31b
+--- /dev/null
++++ b/examples/quick/scenegraph/shared/BUILD
+@@ -0,0 +1,15 @@
++load("@com_github_kklochkov_rules_qt//qt:defs.bzl", "qt_cc_library")
++
++package(default_visibility = ["//visibility:public"])
++
++qt_cc_library(
++    name = "shared",
++    srcs = ["logorenderer.cpp"],
++    hdrs = ["logorenderer.h"],
++    includes = ["."],
++    deps = [
++        "@qt//:QtCore",
++        "@qt//:QtGui",
++        "@qt//:QtOpenGL",
++    ],
++)
+diff --git a/examples/quick/scenegraph/simplematerial/BUILD b/examples/quick/scenegraph/simplematerial/BUILD
+new file mode 100644
+index 0000000000..bac2ad8a58
+--- /dev/null
++++ b/examples/quick/scenegraph/simplematerial/BUILD
+@@ -0,0 +1,31 @@
++load("@com_github_kklochkov_rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
++
++qt_qrc(
++    name = "data",
++    srcs = ["simplematerial.qrc"],
++    data = glob([
++        "**/*.qml",
++        "**/*.qsb",
++    ]),
++)
++
++qt_cc_binary(
++    name = "simplematerial",
++    srcs = [
++        "simplematerial.cpp",
++        "simplematerialitem.cpp",
++    ],
++    moc_hdrs = ["simplematerialitem.h"],
++    qml_module_name = "SimpleMaterial",
++    qrc_srcs = [":data"],
++    visibility = ["//visibility:public"],
++    deps = [
++        "@qt//:QtCore",
++        "@qt//:QtGui",
++        "@qt//:QtNetwork",
++        "@qt//:QtOpenGL",
++        "@qt//:QtQml",
++        "@qt//:QtQmlModels",
++        "@qt//:QtQuick",
++    ],
++)
+diff --git a/examples/quick/scenegraph/threadedanimation/BUILD b/examples/quick/scenegraph/threadedanimation/BUILD
+new file mode 100644
+index 0000000000..566416bca2
+--- /dev/null
++++ b/examples/quick/scenegraph/threadedanimation/BUILD
+@@ -0,0 +1,29 @@
++load("@com_github_kklochkov_rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
++
++qt_qrc(
++    name = "data",
++    srcs = ["threadedanimation.qrc"],
++    data = glob([
++        "**/*.qml",
++        "**/*.png",
++    ]),
++)
++
++qt_cc_binary(
++    name = "threadedanimation",
++    srcs = ["main.cpp"],
++    moc_hdrs = ["spinner.h"],
++    moc_srcs = ["spinner.cpp"],
++    qml_module_name = "Spinner",
++    qrc_srcs = [":data"],
++    visibility = ["//visibility:public"],
++    deps = [
++        "@qt//:QtCore",
++        "@qt//:QtGui",
++        "@qt//:QtNetwork",
++        "@qt//:QtOpenGL",
++        "@qt//:QtQml",
++        "@qt//:QtQmlModels",
++        "@qt//:QtQuick",
++    ],
++)
+diff --git a/examples/quick/scenegraph/twotextureproviders/BUILD b/examples/quick/scenegraph/twotextureproviders/BUILD
+new file mode 100644
+index 0000000000..adf79d4ae7
+--- /dev/null
++++ b/examples/quick/scenegraph/twotextureproviders/BUILD
+@@ -0,0 +1,30 @@
++load("@com_github_kklochkov_rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
++
++qt_qrc(
++    name = "data",
++    srcs = ["twotextureproviders.qrc"],
++    data = glob([
++        "**/*.qml",
++        "**/*.vert",
++        "**/*.frag",
++    ]),
++)
++
++qt_cc_binary(
++    name = "twotextureproviders",
++    srcs = ["main.cpp"],
++    moc_hdrs = ["xorblender.h"],
++    moc_srcs = ["xorblender.cpp"],
++    qml_module_name = "SceneGraphRendering",
++    qrc_srcs = [":data"],
++    visibility = ["//visibility:public"],
++    deps = [
++        "@qt//:QtCore",
++        "@qt//:QtGui",
++        "@qt//:QtNetwork",
++        "@qt//:QtOpenGL",
++        "@qt//:QtQml",
++        "@qt//:QtQmlModels",
++        "@qt//:QtQuick",
++    ],
++)
+diff --git a/examples/quick/shadereffects/BUILD b/examples/quick/shadereffects/BUILD
+new file mode 100644
+index 0000000000..e9479107dd
+--- /dev/null
++++ b/examples/quick/shadereffects/BUILD
+@@ -0,0 +1,29 @@
++load("@com_github_kklochkov_rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
++
++qt_qrc(
++    name = "data",
++    srcs = ["shadereffects.qrc"],
++    data = glob([
++        "**/*.qml",
++        "**/*.vert",
++        "**/*.frag",
++        "**/*.png",
++    ]),
++)
++
++qt_cc_binary(
++    name = "shadereffects",
++    srcs = ["main.cpp"],
++    qrc_srcs = [":data"],
++    visibility = ["//visibility:public"],
++    deps = [
++        "//{root}/shared".format(root = package_name().rstrip("/shadereffects")),
++        "@qt//:QtCore",
++        "@qt//:QtGui",
++        "@qt//:QtNetwork",
++        "@qt//:QtOpenGL",
++        "@qt//:QtQml",
++        "@qt//:QtQmlModels",
++        "@qt//:QtQuick",
++    ],
++)
+diff --git a/examples/quick/shapes/BUILD b/examples/quick/shapes/BUILD
+new file mode 100644
+index 0000000000..436132d23b
+--- /dev/null
++++ b/examples/quick/shapes/BUILD
+@@ -0,0 +1,28 @@
++load("@com_github_kklochkov_rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
++
++qt_qrc(
++    name = "data",
++    srcs = ["shapes.qrc"],
++    data = glob([
++        "**/*.qml",
++        "**/*.png",
++        "**/*.js",
++    ]) + [
++        "//{root}/shared:qml_module".format(root = package_name().rstrip("/shapes")),
++    ],
++)
++
++qt_cc_binary(
++    name = "shapes",
++    srcs = ["main.cpp"],
++    qrc_srcs = [":data"],
++    visibility = ["//visibility:public"],
++    deps = [
++        "//{root}/shared".format(root = package_name().rstrip("/shapes")),
++        "@qt//:QtCore",
++        "@qt//:QtGui",
++        "@qt//:QtNetwork",
++        "@qt//:QtQml",
++        "@qt//:QtQuick",
++    ],
++)
+diff --git a/examples/quick/shared/BUILD b/examples/quick/shared/BUILD
+new file mode 100644
+index 0000000000..420d6255e7
+--- /dev/null
++++ b/examples/quick/shared/BUILD
+@@ -0,0 +1,26 @@
++load("@com_github_kklochkov_rules_qt//qt:defs.bzl", "qt_cc_library", "qt_qml_import", "qt_qrc")
++
++package(default_visibility = ["//visibility:public"])
++
++qt_qml_import(
++    name = "qml_module",
++    srcs = glob([
++        "**/*.qml",
++        "**/*.png",
++    ]),
++)
++
++qt_qrc(
++    name = "data",
++    srcs = [
++        "quick_shared.qrc",
++        "shared.qrc",
++    ],
++    data = [":qml_module"],
++)
++
++qt_cc_library(
++    name = "shared",
++    hdrs = ["shared.h"],
++    qrc_srcs = [":data"],
++)
+diff --git a/examples/quick/tableview/gameoflife/BUILD b/examples/quick/tableview/gameoflife/BUILD
+new file mode 100644
+index 0000000000..311b92ca2f
+--- /dev/null
++++ b/examples/quick/tableview/gameoflife/BUILD
+@@ -0,0 +1,30 @@
++load("@com_github_kklochkov_rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
++
++qt_qrc(
++    name = "data",
++    srcs = ["gameoflife.qrc"],
++    data = glob([
++        "**/*.qml",
++        "gosperglidergun.cells",
++    ]),
++)
++
++qt_cc_binary(
++    name = "gameoflife",
++    srcs = [
++        "gameoflifemodel.cpp",
++        "main.cpp",
++    ],
++    includes = ["."],
++    moc_hdrs = ["gameoflifemodel.h"],
++    qml_module_name = "GameOfLifeModel",
++    qrc_srcs = [":data"],
++    visibility = ["//visibility:public"],
++    deps = [
++        "@qt//:QtCore",
++        "@qt//:QtGui",
++        "@qt//:QtNetwork",
++        "@qt//:QtQml",
++        "@qt//:QtQuick",
++    ],
++)
+diff --git a/examples/quick/tableview/gameoflife/gameoflife.qrc b/examples/quick/tableview/gameoflife/gameoflife.qrc
+new file mode 100644
+index 0000000000..077742793f
+--- /dev/null
++++ b/examples/quick/tableview/gameoflife/gameoflife.qrc
+@@ -0,0 +1,6 @@
++<RCC>
++  <qresource>
++    <file>gosperglidergun.cells</file>
++    <file>main.qml</file>
++  </qresource>
++</RCC>
+diff --git a/examples/quick/tableview/pixelator/BUILD b/examples/quick/tableview/pixelator/BUILD
+new file mode 100644
+index 0000000000..0e9bc5239e
+--- /dev/null
++++ b/examples/quick/tableview/pixelator/BUILD
+@@ -0,0 +1,28 @@
++load("@com_github_kklochkov_rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
++
++qt_qrc(
++    name = "data",
++    data = glob([
++        "**/*.qml",
++        "**/*.png",
++    ]),
++)
++
++qt_cc_binary(
++    name = "pixelator",
++    srcs = [
++        "imagemodel.cpp",
++        "main.cpp",
++    ],
++    moc_hdrs = ["imagemodel.h"],
++    qml_module_name = "ImageModel",
++    qrc_srcs = [":data"],
++    visibility = ["//visibility:public"],
++    deps = [
++        "@qt//:QtCore",
++        "@qt//:QtGui",
++        "@qt//:QtNetwork",
++        "@qt//:QtQml",
++        "@qt//:QtQuick",
++    ],
++)
+diff --git a/examples/quick/text/BUILD b/examples/quick/text/BUILD
+new file mode 100644
+index 0000000000..90bc7706b9
+--- /dev/null
++++ b/examples/quick/text/BUILD
+@@ -0,0 +1,27 @@
++load("@com_github_kklochkov_rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
++
++qt_qrc(
++    name = "data",
++    srcs = ["text.qrc"],
++    data = glob([
++        "**/*.qml",
++        "**/*.png",
++        "**/*.ttf",
++        "**/*.sci",
++    ]),
++)
++
++qt_cc_binary(
++    name = "text",
++    srcs = ["main.cpp"],
++    qrc_srcs = [":data"],
++    visibility = ["//visibility:public"],
++    deps = [
++        "//{root}/shared".format(root = package_name().rstrip("/text")),
++        "@qt//:QtCore",
++        "@qt//:QtGui",
++        "@qt//:QtNetwork",
++        "@qt//:QtQml",
++        "@qt//:QtQuick",
++    ],
++)
+diff --git a/examples/quick/textureprovider/BUILD b/examples/quick/textureprovider/BUILD
+new file mode 100644
+index 0000000000..5717b27010
+--- /dev/null
++++ b/examples/quick/textureprovider/BUILD
+@@ -0,0 +1,29 @@
++load("@com_github_kklochkov_rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
++
++qt_qrc(
++    name = "data",
++    srcs = ["textureprovider.qrc"],
++    data = glob([
++        "**/*.qml",
++        "**/*.jpg",
++        "**/*.pkm",
++    ]),
++)
++
++qt_cc_binary(
++    name = "textureprovider",
++    srcs = [
++        "etcprovider.cpp",
++        "main.cpp",
++    ],
++    moc_hdrs = ["etcprovider.h"],
++    qrc_srcs = [":data"],
++    visibility = ["//visibility:public"],
++    deps = [
++        "@qt//:QtCore",
++        "@qt//:QtGui",
++        "@qt//:QtNetwork",
++        "@qt//:QtQml",
++        "@qt//:QtQuick",
++    ],
++)
+diff --git a/examples/quick/threading/BUILD b/examples/quick/threading/BUILD
+new file mode 100644
+index 0000000000..e553d4cf8f
+--- /dev/null
++++ b/examples/quick/threading/BUILD
+@@ -0,0 +1,26 @@
++load("@com_github_kklochkov_rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
++
++qt_qrc(
++    name = "data",
++    srcs = ["threading.qrc"],
++    data = glob([
++        "**/*.qml",
++        "**/*.png",
++        "**/*.mjs",
++    ]),
++)
++
++qt_cc_binary(
++    name = "threading",
++    srcs = ["main.cpp"],
++    qrc_srcs = [":data"],
++    visibility = ["//visibility:public"],
++    deps = [
++        "//{root}/shared".format(root = package_name().rstrip("/threading")),
++        "@qt//:QtCore",
++        "@qt//:QtGui",
++        "@qt//:QtNetwork",
++        "@qt//:QtQml",
++        "@qt//:QtQuick",
++    ],
++)
+diff --git a/examples/quick/touchinteraction/BUILD b/examples/quick/touchinteraction/BUILD
+new file mode 100644
+index 0000000000..74f2322687
+--- /dev/null
++++ b/examples/quick/touchinteraction/BUILD
+@@ -0,0 +1,26 @@
++load("@com_github_kklochkov_rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
++
++qt_qrc(
++    name = "data",
++    srcs = ["touchinteraction.qrc"],
++    data = glob([
++        "**/*.qml",
++        "**/*.png",
++        "**/*.jpg",
++    ]),
++)
++
++qt_cc_binary(
++    name = "touchinteraction",
++    srcs = ["main.cpp"],
++    qrc_srcs = [":data"],
++    visibility = ["//visibility:public"],
++    deps = [
++        "//{root}/shared".format(root = package_name().rstrip("/touchinteraction")),
++        "@qt//:QtCore",
++        "@qt//:QtGui",
++        "@qt//:QtNetwork",
++        "@qt//:QtQml",
++        "@qt//:QtQuick",
++    ],
++)
+diff --git a/examples/quick/tutorials/dynamicview/dynamicview1/BUILD b/examples/quick/tutorials/dynamicview/dynamicview1/BUILD
+new file mode 100644
+index 0000000000..c05eb1955e
+--- /dev/null
++++ b/examples/quick/tutorials/dynamicview/dynamicview1/BUILD
+@@ -0,0 +1,24 @@
++load("@com_github_kklochkov_rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
++
++qt_qrc(
++    name = "data",
++    srcs = ["dynamicview1.qrc"],
++    data = glob([
++        "**/*.qml",
++    ]),
++)
++
++qt_cc_binary(
++    name = "dynamicview1",
++    srcs = ["main.cpp"],
++    qrc_srcs = [":data"],
++    visibility = ["//visibility:public"],
++    deps = [
++        "//{root}/shared".format(root = package_name().rstrip("/tutorials/dynamicview/dynamicview1")),
++        "@qt//:QtCore",
++        "@qt//:QtGui",
++        "@qt//:QtNetwork",
++        "@qt//:QtQml",
++        "@qt//:QtQuick",
++    ],
++)
+diff --git a/examples/quick/tutorials/dynamicview/dynamicview2/BUILD b/examples/quick/tutorials/dynamicview/dynamicview2/BUILD
+new file mode 100644
+index 0000000000..e22f471d29
+--- /dev/null
++++ b/examples/quick/tutorials/dynamicview/dynamicview2/BUILD
+@@ -0,0 +1,24 @@
++load("@com_github_kklochkov_rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
++
++qt_qrc(
++    name = "data",
++    srcs = ["dynamicview2.qrc"],
++    data = glob([
++        "**/*.qml",
++    ]),
++)
++
++qt_cc_binary(
++    name = "dynamicview2",
++    srcs = ["main.cpp"],
++    qrc_srcs = [":data"],
++    visibility = ["//visibility:public"],
++    deps = [
++        "//{root}/shared".format(root = package_name().rstrip("/tutorials/dynamicview/dynamicview2")),
++        "@qt//:QtCore",
++        "@qt//:QtGui",
++        "@qt//:QtNetwork",
++        "@qt//:QtQml",
++        "@qt//:QtQuick",
++    ],
++)
+diff --git a/examples/quick/tutorials/dynamicview/dynamicview3/BUILD b/examples/quick/tutorials/dynamicview/dynamicview3/BUILD
+new file mode 100644
+index 0000000000..1d8538f6d1
+--- /dev/null
++++ b/examples/quick/tutorials/dynamicview/dynamicview3/BUILD
+@@ -0,0 +1,24 @@
++load("@com_github_kklochkov_rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
++
++qt_qrc(
++    name = "data",
++    srcs = ["dynamicview3.qrc"],
++    data = glob([
++        "**/*.qml",
++    ]),
++)
++
++qt_cc_binary(
++    name = "dynamicview3",
++    srcs = ["main.cpp"],
++    qrc_srcs = [":data"],
++    visibility = ["//visibility:public"],
++    deps = [
++        "//{root}/shared".format(root = package_name().rstrip("/tutorials/dynamicview/dynamicview3")),
++        "@qt//:QtCore",
++        "@qt//:QtGui",
++        "@qt//:QtNetwork",
++        "@qt//:QtQml",
++        "@qt//:QtQuick",
++    ],
++)
+diff --git a/examples/quick/tutorials/dynamicview/dynamicview4/BUILD b/examples/quick/tutorials/dynamicview/dynamicview4/BUILD
+new file mode 100644
+index 0000000000..ee90dfc622
+--- /dev/null
++++ b/examples/quick/tutorials/dynamicview/dynamicview4/BUILD
+@@ -0,0 +1,23 @@
++load("@com_github_kklochkov_rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
++
++qt_qrc(
++    name = "data",
++    data = glob([
++        "**/*.qml",
++    ]),
++)
++
++qt_cc_binary(
++    name = "dynamicview4",
++    srcs = ["main.cpp"],
++    qrc_srcs = [":data"],
++    visibility = ["//visibility:public"],
++    deps = [
++        "//{root}/shared".format(root = package_name().rstrip("/tutorials/dynamicview/dynamicview4")),
++        "@qt//:QtCore",
++        "@qt//:QtGui",
++        "@qt//:QtNetwork",
++        "@qt//:QtQml",
++        "@qt//:QtQuick",
++    ],
++)
+diff --git a/examples/quick/tutorials/samegame/samegame1/BUILD b/examples/quick/tutorials/samegame/samegame1/BUILD
+new file mode 100644
+index 0000000000..dfa0dc2b51
+--- /dev/null
++++ b/examples/quick/tutorials/samegame/samegame1/BUILD
+@@ -0,0 +1,27 @@
++load("@com_github_kklochkov_rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
++
++qt_qrc(
++    name = "data",
++    srcs = ["samegame1.qrc"],
++    data = glob([
++        "**/*.qml",
++        "**/*.png",
++        "**/*.jpg",
++    ]),
++)
++
++qt_cc_binary(
++    name = "samegame1",
++    srcs = ["main.cpp"],
++    qrc_srcs = [":data"],
++    visibility = ["//visibility:public"],
++    deps = [
++        "//{root}/shared".format(root = package_name().rstrip("/tutorials/samegame/samegame1")),
++        "//{root}/shared/pics:shared".format(root = package_name().replace("/samegame1", "")),
++        "@qt//:QtCore",
++        "@qt//:QtGui",
++        "@qt//:QtNetwork",
++        "@qt//:QtQml",
++        "@qt//:QtQuick",
++    ],
++)
+diff --git a/examples/quick/tutorials/samegame/samegame2/BUILD b/examples/quick/tutorials/samegame/samegame2/BUILD
+new file mode 100644
+index 0000000000..453f2500c5
+--- /dev/null
++++ b/examples/quick/tutorials/samegame/samegame2/BUILD
+@@ -0,0 +1,28 @@
++load("@com_github_kklochkov_rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
++
++qt_qrc(
++    name = "data",
++    srcs = ["samegame2.qrc"],
++    data = glob([
++        "**/*.qml",
++        "**/*.png",
++        "**/*.jpg",
++        "**/*.js",
++    ]),
++)
++
++qt_cc_binary(
++    name = "samegame2",
++    srcs = ["main.cpp"],
++    qrc_srcs = [":data"],
++    visibility = ["//visibility:public"],
++    deps = [
++        "//{root}/shared".format(root = package_name().rstrip("/tutorials/samegame/samegame2")),
++        "//{root}/shared/pics:shared".format(root = package_name().replace("/samegame2", "")),
++        "@qt//:QtCore",
++        "@qt//:QtGui",
++        "@qt//:QtNetwork",
++        "@qt//:QtQml",
++        "@qt//:QtQuick",
++    ],
++)
+diff --git a/examples/quick/tutorials/samegame/samegame3/BUILD b/examples/quick/tutorials/samegame/samegame3/BUILD
+new file mode 100644
+index 0000000000..f417a06eb4
+--- /dev/null
++++ b/examples/quick/tutorials/samegame/samegame3/BUILD
+@@ -0,0 +1,27 @@
++load("@com_github_kklochkov_rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
++
++qt_qrc(
++    name = "data",
++    data = glob([
++        "**/*.qml",
++        "**/*.png",
++        "**/*.jpg",
++        "**/*.js",
++    ]),
++)
++
++qt_cc_binary(
++    name = "samegame3",
++    srcs = ["main.cpp"],
++    qrc_srcs = [":data"],
++    visibility = ["//visibility:public"],
++    deps = [
++        "//{root}/shared".format(root = package_name().rstrip("/tutorials/samegame/samegame3")),
++        "//{root}/shared/pics:shared".format(root = package_name().replace("/samegame3", "")),
++        "@qt//:QtCore",
++        "@qt//:QtGui",
++        "@qt//:QtNetwork",
++        "@qt//:QtQml",
++        "@qt//:QtQuick",
++    ],
++)
+diff --git a/examples/quick/tutorials/samegame/samegame4/BUILD b/examples/quick/tutorials/samegame/samegame4/BUILD
+new file mode 100644
+index 0000000000..574656301d
+--- /dev/null
++++ b/examples/quick/tutorials/samegame/samegame4/BUILD
+@@ -0,0 +1,32 @@
++load("@com_github_kklochkov_rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
++
++qt_qrc(
++    name = "data",
++    srcs = ["samegame4.qrc"],
++    data = glob([
++        "**/*.qml",
++        "**/*.png",
++        "**/*.jpg",
++        "**/*.js",
++        "**/README",
++        "**/*.xml",
++        "**/*.xsl",
++        "**/*.php",
++    ]),
++)
++
++qt_cc_binary(
++    name = "samegame4",
++    srcs = ["main.cpp"],
++    qrc_srcs = [":data"],
++    visibility = ["//visibility:public"],
++    deps = [
++        "//{root}/shared".format(root = package_name().rstrip("/tutorials/samegame/samegame4")),
++        "//{root}/shared/pics:shared".format(root = package_name().replace("/samegame4", "")),
++        "@qt//:QtCore",
++        "@qt//:QtGui",
++        "@qt//:QtNetwork",
++        "@qt//:QtQml",
++        "@qt//:QtQuick",
++    ],
++)
+diff --git a/examples/quick/tutorials/samegame/shared/pics/BUILD b/examples/quick/tutorials/samegame/shared/pics/BUILD
+new file mode 100644
+index 0000000000..6e618d3a50
+--- /dev/null
++++ b/examples/quick/tutorials/samegame/shared/pics/BUILD
+@@ -0,0 +1,17 @@
++load("@com_github_kklochkov_rules_qt//qt:defs.bzl", "qt_cc_library", "qt_qrc")
++
++package(default_visibility = ["//visibility:public"])
++
++qt_qrc(
++    name = "data",
++    srcs = ["shared.qrc"],
++    data = glob([
++        "*.png",
++        "*.jpg",
++    ]),
++)
++
++qt_cc_library(
++    name = "shared",
++    qrc_srcs = [":data"],
++)
+diff --git a/examples/quick/views/BUILD b/examples/quick/views/BUILD
+new file mode 100644
+index 0000000000..fed6036ccd
+--- /dev/null
++++ b/examples/quick/views/BUILD
+@@ -0,0 +1,26 @@
++load("@com_github_kklochkov_rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
++
++qt_qrc(
++    name = "data",
++    srcs = ["views.qrc"],
++    data = glob([
++        "**/*.qml",
++        "**/*.png",
++        "**/*.jpg",
++    ]),
++)
++
++qt_cc_binary(
++    name = "views",
++    srcs = ["main.cpp"],
++    qrc_srcs = [":data"],
++    visibility = ["//visibility:public"],
++    deps = [
++        "//{root}/shared".format(root = package_name().rstrip("/views")),
++        "@qt//:QtCore",
++        "@qt//:QtGui",
++        "@qt//:QtNetwork",
++        "@qt//:QtQml",
++        "@qt//:QtQuick",
++    ],
++)
+diff --git a/examples/quick/window/BUILD b/examples/quick/window/BUILD
+new file mode 100644
+index 0000000000..8228150671
+--- /dev/null
++++ b/examples/quick/window/BUILD
+@@ -0,0 +1,28 @@
++load("@com_github_kklochkov_rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
++
++qt_qrc(
++    name = "data",
++    srcs = ["window.qrc"],
++    data = glob([
++        "**/*.qml",
++        "**/*.png",
++        "**/*.svg",
++        "**/*.icns",
++        "**/*.ico",
++    ]),
++)
++
++qt_cc_binary(
++    name = "window",
++    srcs = ["main.cpp"],
++    qrc_srcs = [":data"],
++    visibility = ["//visibility:public"],
++    deps = [
++        "//{root}/shared".format(root = package_name().rstrip("/window")),
++        "@qt//:QtCore",
++        "@qt//:QtGui",
++        "@qt//:QtNetwork",
++        "@qt//:QtQml",
++        "@qt//:QtQuick",
++    ],
++)

@@ -1,0 +1,414 @@
+diff --git a/examples/quick3d/antialiasing/BUILD b/examples/quick3d/antialiasing/BUILD
+new file mode 100644
+index 00000000..5da9f1d4
+--- /dev/null
++++ b/examples/quick3d/antialiasing/BUILD
+@@ -0,0 +1,24 @@
++load("@com_github_kklochkov_rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
++
++qt_qrc(
++    name = "data",
++    srcs = ["qml.qrc"],
++    data = glob([
++        "**/*.qml",
++    ]),
++)
++
++qt_cc_binary(
++    name = "antialiasing",
++    srcs = ["main.cpp"],
++    qrc_srcs = [":data"],
++    visibility = ["//visibility:public"],
++    deps = [
++        "@qt//:QtCore",
++        "@qt//:QtGui",
++        "@qt//:QtNetwork",
++        "@qt//:QtQml",
++        "@qt//:QtQuick",
++        "@qt//:QtQuick3D",
++    ],
++)
+diff --git a/examples/quick3d/custommaterial/BUILD b/examples/quick3d/custommaterial/BUILD
+new file mode 100644
+index 00000000..6dc75cf7
+--- /dev/null
++++ b/examples/quick3d/custommaterial/BUILD
+@@ -0,0 +1,29 @@
++load("@com_github_kklochkov_rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
++
++qt_qrc(
++    name = "data",
++    srcs = [
++        "materials.qrc",
++        "qml.qrc",
++    ],
++    data = glob([
++        "**/*.qml",
++        "**/*.hdr",
++        "**/*.mesh",
++    ]),
++)
++
++qt_cc_binary(
++    name = "custommaterial",
++    srcs = ["main.cpp"],
++    qrc_srcs = [":data"],
++    visibility = ["//visibility:public"],
++    deps = [
++        "@qt//:QtCore",
++        "@qt//:QtGui",
++        "@qt//:QtNetwork",
++        "@qt//:QtQml",
++        "@qt//:QtQuick",
++        "@qt//:QtQuick3D",
++    ],
++)
+diff --git a/examples/quick3d/customshaders/BUILD b/examples/quick3d/customshaders/BUILD
+new file mode 100644
+index 00000000..4d2440c7
+--- /dev/null
++++ b/examples/quick3d/customshaders/BUILD
+@@ -0,0 +1,26 @@
++load("@com_github_kklochkov_rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
++
++qt_qrc(
++    name = "data",
++    srcs = ["resources.qrc"],
++    data = glob([
++        "**/*.qml",
++        "**/*.vert",
++        "**/*.frag",
++    ]),
++)
++
++qt_cc_binary(
++    name = "customshaders",
++    srcs = ["main.cpp"],
++    qrc_srcs = [":data"],
++    visibility = ["//visibility:public"],
++    deps = [
++        "@qt//:QtCore",
++        "@qt//:QtGui",
++        "@qt//:QtNetwork",
++        "@qt//:QtQml",
++        "@qt//:QtQuick",
++        "@qt//:QtQuick3D",
++    ],
++)
+diff --git a/examples/quick3d/dynamiccreation/BUILD b/examples/quick3d/dynamiccreation/BUILD
+new file mode 100644
+index 00000000..c43de436
+--- /dev/null
++++ b/examples/quick3d/dynamiccreation/BUILD
+@@ -0,0 +1,25 @@
++load("@com_github_kklochkov_rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
++
++qt_qrc(
++    name = "data",
++    srcs = ["qml.qrc"],
++    data = glob([
++        "**/*.qml",
++        "**/*.mesh",
++    ]),
++)
++
++qt_cc_binary(
++    name = "dynamiccreation",
++    srcs = ["main.cpp"],
++    qrc_srcs = [":data"],
++    visibility = ["//visibility:public"],
++    deps = [
++        "@qt//:QtCore",
++        "@qt//:QtGui",
++        "@qt//:QtNetwork",
++        "@qt//:QtQml",
++        "@qt//:QtQuick",
++        "@qt//:QtQuick3D",
++    ],
++)
+diff --git a/examples/quick3d/dynamictexture/BUILD b/examples/quick3d/dynamictexture/BUILD
+new file mode 100644
+index 00000000..1fade35d
+--- /dev/null
++++ b/examples/quick3d/dynamictexture/BUILD
+@@ -0,0 +1,27 @@
++load("@com_github_kklochkov_rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
++
++qt_qrc(
++    name = "data",
++    data = glob([
++        "**/*.qml",
++        "**/*.mesh",
++        "**/*.jpg",
++        "**/*.png",
++    ]),
++)
++
++qt_cc_binary(
++    name = "dynamictexture",
++    srcs = ["main.cpp"],
++    data = [":content"],
++    qrc_srcs = [":data"],
++    visibility = ["//visibility:public"],
++    deps = [
++        "@qt//:QtCore",
++        "@qt//:QtGui",
++        "@qt//:QtNetwork",
++        "@qt//:QtQml",
++        "@qt//:QtQuick",
++        "@qt//:QtQuick3D",
++    ],
++)
+diff --git a/examples/quick3d/effects/BUILD b/examples/quick3d/effects/BUILD
+new file mode 100644
+index 00000000..76316f53
+--- /dev/null
++++ b/examples/quick3d/effects/BUILD
+@@ -0,0 +1,24 @@
++load("@com_github_kklochkov_rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
++
++qt_qrc(
++    name = "data",
++    srcs = ["qml.qrc"],
++    data = glob([
++        "**/*.qml",
++    ]),
++)
++
++qt_cc_binary(
++    name = "effects",
++    srcs = ["main.cpp"],
++    qrc_srcs = [":data"],
++    visibility = ["//visibility:public"],
++    deps = [
++        "@qt//:QtCore",
++        "@qt//:QtGui",
++        "@qt//:QtNetwork",
++        "@qt//:QtQml",
++        "@qt//:QtQuick",
++        "@qt//:QtQuick3D",
++    ],
++)
+diff --git a/examples/quick3d/hellocube/BUILD b/examples/quick3d/hellocube/BUILD
+new file mode 100644
+index 00000000..e43ef58b
+--- /dev/null
++++ b/examples/quick3d/hellocube/BUILD
+@@ -0,0 +1,25 @@
++load("@com_github_kklochkov_rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
++
++qt_qrc(
++    name = "data",
++    srcs = ["qml.qrc"],
++    data = glob([
++        "**/*.qml",
++        "**/*.png",
++    ]),
++)
++
++qt_cc_binary(
++    name = "hellocube",
++    srcs = ["main.cpp"],
++    qrc_srcs = [":data"],
++    visibility = ["//visibility:public"],
++    deps = [
++        "@qt//:QtCore",
++        "@qt//:QtGui",
++        "@qt//:QtNetwork",
++        "@qt//:QtQml",
++        "@qt//:QtQuick",
++        "@qt//:QtQuick3D",
++    ],
++)
+diff --git a/examples/quick3d/lights/BUILD b/examples/quick3d/lights/BUILD
+new file mode 100644
+index 00000000..51e0d2b9
+--- /dev/null
++++ b/examples/quick3d/lights/BUILD
+@@ -0,0 +1,25 @@
++load("@com_github_kklochkov_rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
++
++qt_qrc(
++    name = "data",
++    srcs = ["qml.qrc"],
++    data = glob([
++        "**/*.qml",
++        "**/*.mesh",
++    ]),
++)
++
++qt_cc_binary(
++    name = "lights",
++    srcs = ["main.cpp"],
++    qrc_srcs = [":data"],
++    visibility = ["//visibility:public"],
++    deps = [
++        "@qt//:QtCore",
++        "@qt//:QtGui",
++        "@qt//:QtNetwork",
++        "@qt//:QtQml",
++        "@qt//:QtQuick",
++        "@qt//:QtQuick3D",
++    ],
++)
+diff --git a/examples/quick3d/picking/BUILD b/examples/quick3d/picking/BUILD
+new file mode 100644
+index 00000000..a5fd9bcc
+--- /dev/null
++++ b/examples/quick3d/picking/BUILD
+@@ -0,0 +1,28 @@
++load("@com_github_kklochkov_rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
++
++qt_qrc(
++    name = "data",
++    srcs = [
++        "materials.qrc",
++        "qml.qrc",
++    ],
++    data = glob([
++        "**/*.qml",
++        "**/*.jpg",
++    ]),
++)
++
++qt_cc_binary(
++    name = "picking",
++    srcs = ["main.cpp"],
++    qrc_srcs = [":data"],
++    visibility = ["//visibility:public"],
++    deps = [
++        "@qt//:QtCore",
++        "@qt//:QtGui",
++        "@qt//:QtNetwork",
++        "@qt//:QtQml",
++        "@qt//:QtQuick",
++        "@qt//:QtQuick3D",
++    ],
++)
+diff --git a/examples/quick3d/principledmaterial/BUILD b/examples/quick3d/principledmaterial/BUILD
+new file mode 100644
+index 00000000..247ec29c
+--- /dev/null
++++ b/examples/quick3d/principledmaterial/BUILD
+@@ -0,0 +1,29 @@
++load("@com_github_kklochkov_rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
++
++qt_qrc(
++    name = "data",
++    srcs = [
++        "materials.qrc",
++        "qml.qrc",
++    ],
++    data = glob([
++        "**/*.qml",
++        "**/*.jpg",
++        "**/*.hdr",
++    ]),
++)
++
++qt_cc_binary(
++    name = "principledmaterial",
++    srcs = ["main.cpp"],
++    qrc_srcs = [":data"],
++    visibility = ["//visibility:public"],
++    deps = [
++        "@qt//:QtCore",
++        "@qt//:QtGui",
++        "@qt//:QtNetwork",
++        "@qt//:QtQml",
++        "@qt//:QtQuick",
++        "@qt//:QtQuick3D",
++    ],
++)
+diff --git a/examples/quick3d/quickitems/BUILD b/examples/quick3d/quickitems/BUILD
+new file mode 100644
+index 00000000..6ddd7d6a
+--- /dev/null
++++ b/examples/quick3d/quickitems/BUILD
+@@ -0,0 +1,25 @@
++load("@com_github_kklochkov_rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
++
++qt_qrc(
++    name = "data",
++    srcs = ["qml.qrc"],
++    data = glob([
++        "**/*.qml",
++        "**/*.png",
++    ]),
++)
++
++qt_cc_binary(
++    name = "quickitems",
++    srcs = ["main.cpp"],
++    qrc_srcs = [":data"],
++    visibility = ["//visibility:public"],
++    deps = [
++        "@qt//:QtCore",
++        "@qt//:QtGui",
++        "@qt//:QtNetwork",
++        "@qt//:QtQml",
++        "@qt//:QtQuick",
++        "@qt//:QtQuick3D",
++    ],
++)
+diff --git a/examples/quick3d/simple/BUILD b/examples/quick3d/simple/BUILD
+new file mode 100644
+index 00000000..23fc9152
+--- /dev/null
++++ b/examples/quick3d/simple/BUILD
+@@ -0,0 +1,24 @@
++load("@com_github_kklochkov_rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
++
++qt_qrc(
++    name = "data",
++    srcs = ["qml.qrc"],
++    data = glob([
++        "**/*.qml",
++    ]),
++)
++
++qt_cc_binary(
++    name = "simple",
++    srcs = ["main.cpp"],
++    qrc_srcs = [":data"],
++    visibility = ["//visibility:public"],
++    deps = [
++        "@qt//:QtCore",
++        "@qt//:QtGui",
++        "@qt//:QtNetwork",
++        "@qt//:QtQml",
++        "@qt//:QtQuick",
++        "@qt//:QtQuick3D",
++    ],
++)
+diff --git a/examples/quick3d/view3d/BUILD b/examples/quick3d/view3d/BUILD
+new file mode 100644
+index 00000000..f04df982
+--- /dev/null
++++ b/examples/quick3d/view3d/BUILD
+@@ -0,0 +1,25 @@
++load("@com_github_kklochkov_rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
++
++qt_qrc(
++    name = "data",
++    srcs = ["qml.qrc"],
++    data = glob([
++        "**/*.qml",
++        "**/*.mesh",
++    ]),
++)
++
++qt_cc_binary(
++    name = "view3d",
++    srcs = ["main.cpp"],
++    qrc_srcs = [":data"],
++    visibility = ["//visibility:public"],
++    deps = [
++        "@qt//:QtCore",
++        "@qt//:QtGui",
++        "@qt//:QtNetwork",
++        "@qt//:QtQml",
++        "@qt//:QtQuick",
++        "@qt//:QtQuick3D",
++    ],
++)
