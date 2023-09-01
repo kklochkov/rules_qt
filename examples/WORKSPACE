@@ -77,6 +77,7 @@ load("@com_github_kklochkov_rules_qt//qt:qt_local_repo.bzl", "qt_local_repo")
 
 qt_local_repo(
     name = "qt",
+    infer_deps = True,
     # Linux
     #path = "/usr/lib/qt5",
     #path = "/usr/lib/qt6",

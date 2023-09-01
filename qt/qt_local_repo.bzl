@@ -262,17 +262,26 @@ def _create_headers_symlinks(repository_ctx, qtconf):
 def _create_libs_symlinks(repository_ctx, qt_libs_context, qtconf):
     """Helper function that creates symlinks for Qt's libs."""
     for path in repository_ctx.path(qtconf.original_vars.QT_INSTALL_LIBS).readdir():
+        # skip non-qt files
+        is_qt = path.basename.startswith(qtconf.lib_prefix) or path.basename.startswith("Qt")
+
         # skip non lib files
         is_osx_framework = path.basename.endswith(".framework")
-        is_prl = path.basename.endswith(".prl")
-        is_la = path.basename.endswith(".la")
-        if is_prl or is_la or (not is_osx_framework and not path.basename.startswith(qtconf.lib_prefix)):
+        is_linux_so = path.basename.endswith(".so")
+        is_lib = is_osx_framework or is_linux_so
+
+        if not is_qt or not is_lib:
             continue
+
+        # TODO: add macOS support
+        # find out which other qt modules this one depends on
+        qt_deps = []
+        if is_linux_so and repository_ctx.attr.infer_deps:
+            qt_deps = _find_linux_lib_deps(repository_ctx, path, qtconf.lib_prefix)
 
         _try_create_symlink(repository_ctx, path, qtconf.extra_vars.LIBS_PREFIX)
 
-        basename = path.basename.split(".")[0]
-        lib_name = basename.replace(qtconf.lib_prefix, "Qt")
+        lib_name = _create_lib_name(path.basename, qtconf.lib_prefix)
         if lib_name in qt_libs_context:
             qt_lib_context = qt_libs_context[lib_name]
             qt_lib_context.libs.append(path.basename)
@@ -281,7 +290,7 @@ def _create_libs_symlinks(repository_ctx, qt_libs_context, qtconf):
                 libs = qt_lib_context.libs,
                 has_headers = qt_lib_context.has_headers,
                 is_osx_framework = is_osx_framework,
-                deps = qt_lib_context.deps,
+                deps = qt_lib_context.deps + qt_deps,
             )
         else:
             qt_libs_context[lib_name] = _QtLibsContext(
@@ -289,10 +298,41 @@ def _create_libs_symlinks(repository_ctx, qt_libs_context, qtconf):
                 libs = [path.basename],
                 has_headers = False,
                 is_osx_framework = is_osx_framework,
-                deps = list(),
+                deps = qt_deps,
             )
 
     return qt_libs_context
+
+def _create_lib_name(raw_lib_name, lib_prefix):
+    """Helper function that produces a name for a generated library from the raw basename of a library file.
+    For example, `libQt6SomeLib.so.6` becomes `QtSomeLib`."""
+    name_only = raw_lib_name.split(".")[0]
+    return name_only.replace(lib_prefix, "Qt")
+
+def _find_linux_lib_deps(repository_ctx, path, lib_prefix):
+    """Analyzes a Qt shared library using `ldd` and extracts the names of its dependencies on other Qt libraries.
+    Keep in mind all linked libraries are added as dependencies, even if they are optional in runtime."""
+    result = repository_ctx.execute(["ldd", path])
+    if result.return_code != 0:
+        fail(result.stderr)
+
+    linked_libs = [_extract_lib_from_ldd_line(line) for line in result.stdout.splitlines()]
+    linked_qt_libs = [lib for lib in linked_libs if lib.startswith(lib_prefix)]
+    qt_dep_names = [_create_lib_name(lib, lib_prefix) for lib in linked_qt_libs]
+
+    return qt_dep_names
+
+def _extract_lib_from_ldd_line(ldd_line):
+    """Processes a line from the output of `ldd` and returns the plain name of the linked library.
+    For example, one of the lines output by ldd could be this:
+        `libgpg-error.so.0 => /usr/lib/libgpg-error.so.0 (0x00007f2da3691000)`
+    And the output from this function would be:
+        `libgpg-error`
+    """
+    so_basename = ldd_line.strip().split(" ")[0]
+    lib_name = so_basename.split(".")[0]
+
+    return lib_name
 
 def _join_libs(libs):
     """Helper function that consolidates `libs` list in a string."""
@@ -419,6 +459,9 @@ The path to locally installed Qt's folder where `qmake` is located, usually it i
 The [qt_http_repo](qt_http_repo-docs.md) target name to boostrap Qt.
 """),
         "_reuired_tools": attr.string_list(default = ["moc", "rcc", "uic", "qmltyperegistrar", "balsam"]),
+        "infer_deps": attr.bool(default = False, doc = """
+        When set to True, Qt shared libraries will be inspected to find their dependencies on other Qt modules, and
+        those dependencies added to the generated cc_library targets. (Linux only) """),
     },
     local = True,
 )
