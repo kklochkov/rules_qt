@@ -398,7 +398,7 @@ def _qt_local_repo_impl(repository_ctx):
         content.append(_BUILD_CONTENT_CC_TARGET_EPILOGUE)
 
     # add last bits
-    content.append(_BUILD_CONTENT_CC_TARGET_ALL_HEADERS.format(includes = _join_includes(qtconf, qt_libs_context.keys())))
+    content.append(_BUILD_CONTENT_CC_TARGET_ALL_HEADERS.format(includes = _join_includes(qtconf, sorted(qt_libs_context.keys()))))
     content.append(_BUILD_CONTENT_EPILOGUE)
 
     repository_ctx.file("BUILD.bazel", "\n".join(content))
