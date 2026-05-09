@@ -1,4 +1,4 @@
-load("@com_github_kklochkov_rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_cc_moc", "qt_cc_moc_import")
+load("@rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_cc_moc", "qt_cc_moc_import")
 load("@rules_cc//cc:defs.bzl", "cc_binary")
 
 # Example of `qt_cc_moc` and `qt_cc_moc_import` usage.

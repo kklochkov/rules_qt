@@ -1,10 +1,10 @@
-load("@com_github_kklochkov_rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_cc_rcc", "qt_qrc")
+load("@rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_cc_rcc", "qt_qrc")
 load("@rules_cc//cc:defs.bzl", "cc_binary")
 
 # Example of `qt_qrc` and `qt_cc_rcc` usage.
 qt_qrc(
     name = "qrc",
-    # Provide existing`qrc` file.
+    # Provide existing `qrc` file.
     srcs = ["resources.qrc"],
     data = ["text.txt"],
 )

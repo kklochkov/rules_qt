@@ -2,6 +2,16 @@
 
 load(":private/utils.bzl", "MocInfo", "QT_TOOLCHAIN")
 
+def _resolve_qml_metatypes(ctx, deps):
+    """Resolves Qt built-in metatypes File objects for qmltyperegistrar foreign-types."""
+    metatypes = ctx.toolchains[QT_TOOLCHAIN].qtinfo.metatypes
+    resolved = []
+    for dep in deps:
+        f = metatypes.get(dep.label.name)
+        if f:
+            resolved.append(f)
+    return sorted(resolved, key = lambda f: f.path)
+
 def _qml_module_impl(ctx):
     toolchain = ctx.toolchains[QT_TOOLCHAIN]
 
@@ -21,41 +31,44 @@ def _qml_module_impl(ctx):
         arguments = [args],
     )
 
-    # run qmltyperegistation
+    # run qmltyperegistration
     inputs = list()
     inputs.append(metatypes_json)
 
     outputs = list()
-    qmltyperegistation = ctx.actions.declare_file("{name}_qmltyperegistrations".format(name = ctx.label.name))
-    outputs.append(qmltyperegistation)
+    qmltyperegistration = ctx.actions.declare_file("{name}_qmltyperegistrations".format(name = ctx.label.name))
+    outputs.append(qmltyperegistration)
 
     qmltypes = ctx.actions.declare_file("{name}.qmltypes".format(name = ctx.label.name))
     outputs.append(qmltypes)
 
-    metatypes = list()
-    for metatype in toolchain.qtinfo.metatypes.files.to_list():
-        metatypes.append(metatype.path)
-        inputs.append(metatype)
+    # qmltyperegistrar must see only the relevant Qt built-in metatypes.
+    # Passing the entire SDK metatype set can trigger duplicate C++ type
+    # warnings (ODR-like diagnostics) when unrelated Qt modules define
+    # colliding type names.
+    metatypes = _resolve_qml_metatypes(ctx, ctx.attr.deps)
+    inputs.extend(metatypes)
 
     args = ctx.actions.args()
-    args.add("--foreign-types", ",".join(metatypes))
+    if metatypes:
+        args.add("--foreign-types", ",".join([f.path for f in metatypes]))
     args.add("--generate-qmltypes", qmltypes)
     args.add("--import-name={module_name}".format(module_name = ctx.attr.module_name))
     args.add("--major-version={version}".format(version = ctx.attr.major_version))
     args.add("--minor-version={version}".format(version = ctx.attr.minor_version))
-    args.add("-o", qmltyperegistation)
+    args.add("-o", qmltyperegistration)
     args.add(metatypes_json)
 
     ctx.actions.run(
         inputs = inputs,
         outputs = outputs,
-        progress_message = "[Qt qmltyperegistrar]: generating {path}".format(path = qmltyperegistation.short_path),
+        progress_message = "[Qt qmltyperegistrar]: generating {path}".format(path = qmltyperegistration.short_path),
         executable = toolchain.qtinfo.qmltyperegistrar,
         arguments = [args],
     )
 
-    # we need to fixup angle brackes includes in generated files to quoted ones
-    cpp = ctx.actions.declare_file("{name}.cpp".format(name = qmltyperegistation.basename))
+    # we need to fixup angle brackets includes in generated files to quoted ones
+    cpp = ctx.actions.declare_file("{name}.cpp".format(name = qmltyperegistration.basename))
     outputs.append(cpp)
 
     substitution_pairs = list()
@@ -64,7 +77,7 @@ def _qml_module_impl(ctx):
             ("<{old_name}>".format(old_name = hdr.basename), ("\"{new_name}\"".format(new_name = hdr.short_path))),
         )
 
-    ctx.actions.expand_template(template = qmltyperegistation, output = cpp, substitutions = dict(substitution_pairs))
+    ctx.actions.expand_template(template = qmltyperegistration, output = cpp, substitutions = dict(substitution_pairs))
 
     return [DefaultInfo(files = depset(outputs))]
 
@@ -75,7 +88,7 @@ Collects metainformation, provided by [qt_cc_moc](#qt_cc_moc) via [MocInfo](prov
 of available C++ QML types and generates C++ routines to register them as QML modules.
 
 More info about QtQml C++ integration can be found here: [Qt5](https://doc.qt.io/qt-5/qtqml-cppintegration-definetypes.html)
-and [Qt6](https://doc.qt.io/qt-6.4/qtqml-cppintegration-definetypes.html).
+and [Qt6](https://doc.qt.io/qt-6/qtqml-cppintegration-definetypes.html).
     """,
     attrs = {
         "major_version": attr.int(
@@ -87,7 +100,7 @@ Major version of QML module.
         "minor_version": attr.int(
             default = 0,
             doc = """
-Major version of QML module.
+Minor version of QML module.
 """,
         ),
         "moc": attr.label(
@@ -101,6 +114,11 @@ A [qt_cc_moc](#qt_cc_moc) target that provides [MocInfo](providers-docs.md#MocIn
             mandatory = True,
             doc = """
 A name of a module under which it will be accessible in QML.
+""",
+        ),
+        "deps": attr.label_list(
+            doc = """
+Dependencies used to infer which Qt built-in metatypes should be passed to qmltyperegistrar.
 """,
         ),
     },

@@ -39,7 +39,7 @@ def _qrc_impl(ctx):
 
     qrcs = list(ctx.files.srcs)
     if len(qrcs) != 0 and len(ctx.attr.prefix) != 0:
-        print("Both 'srcs' and 'prefix' attributes are provided. The 'prefix' attibute will be inored.")
+        print("Both 'srcs' and 'prefix' attributes are provided. The 'prefix' attribute will be ignored.")  # buildifier: disable=print
 
     data = list(ctx.files.data)
     if len(qrcs) == 0:
@@ -87,7 +87,7 @@ Only available for auto `qrc` file generation, i.e. when the `srcs` attribute is
         "srcs": attr.label_list(
             allow_files = [".qrc"],
             doc = """
-A list of `qrc` files for will propagated to [qt_cc_rcc](#qt_cc_rcc) via [QrcInfo](providers-docs.md#QrcInfo).
+A list of `qrc` files that will be propagated to [qt_cc_rcc](#qt_cc_rcc) via [QrcInfo](providers-docs.md#QrcInfo).
 """,
         ),
     },
@@ -101,20 +101,20 @@ def _rcc_impl(ctx):
     cpps = list()
     for qrc in ctx.attr.srcs:
         qrc_info = qrc[QrcInfo]
-        for qrc in qrc_info.qrcs:
-            qrc_name = qrc.basename.replace(".qrc", "")
+        for qrc_file in qrc_info.qrcs:
+            qrc_name = qrc_file.basename.replace(".qrc", "")
             cpp = ctx.actions.declare_file("qrc_{name}.cpp".format(name = qrc_name))
             cpps.append(cpp)
 
-            initilizer_name = "{package}_{label}".format(package = ctx.label.package.replace("/", "_"), label = qrc_name)
+            initializer_name = "{package}_{label}".format(package = ctx.label.package.replace("/", "_"), label = qrc_name)
 
             args = ctx.actions.args()
-            args.add("--name", initilizer_name)
+            args.add("--name", initializer_name)
             args.add("--output", cpp)
-            args.add(qrc)
+            args.add(qrc_file)
 
             ctx.actions.run(
-                inputs = [qrc] + qrc_info.data,
+                inputs = [qrc_file] + qrc_info.data,
                 outputs = [cpp],
                 progress_message = "[Qt rcc]: generating {path}".format(path = cpp.short_path),
                 executable = toolchain.qtinfo.rcc,

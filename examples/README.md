@@ -1,17 +1,37 @@
 # Examples of how to use Qt rules for Bazel
 
+## Qt setup (`MODULE.bazel`)
+
+Examples use bzlmod. All Qt SDK candidates (local and remote, for both Qt5 and Qt6)
+are declared in `examples/MODULE.bazel`. The active SDK is selected by a single line:
+
+```starlark
+qt.active_sdk(name = "qt", repo = "qt6_local")
+```
+
+To switch, change the `repo` value to any declared candidate name, e.g.:
+- `qt5_local` / `qt6_local` -- locally installed Qt (path auto-selected by platform)
+- `qt5_remote` / `qt6_remote` -- source builds
+
+Patched upstream `qtdeclarative` / `qtquick3d` example BUILD files use `allow_empty = True` for some `glob(...)`
+entries because optional assets vary across Qt versions and package layouts.
+
 ## hello_rules
 The folder has several examples that show how to use rules and convenience [qt_cc_binary](../doc/docs.md#qt_cc_binary)
-macro which reduces the amount of code, but in its esses does exactly the same thing as plain usage of the rules.
+macro which reduces the amount of code, but in its essence does exactly the same thing as plain usage of the rules.
 
 * hello_rules/1_moc -- demonstrates how to use [qt_cc_moc](../doc/docs.md#qt_cc_moc) and [qt_cc_moc_import](../doc/docs.md#qt_cc_moc_import).
 * hello_rules/2_rcc -- demonstrates how to use [qt_qrc](../doc/docs.md#qt_qrc) and [qt_cc_rcc](../doc/docs.md#qt_cc_rcc).
 * hello_rules/3_uic -- demonstrates how to use [qt_cc_uic](../doc/docs.md#qt_cc_uic).
-* hello_rules/4_qml -- demonstrates how to use [qt_cc_qml_module](../doc/docs.md#qt_cc_qml_module).
+* hello_rules/4_qml -- demonstrates how to use [qt_qml_cc_module](../doc/docs.md#qt_qml_cc_module).
 * hello_rules/5_balsam`*` -- demonstrates how to use [qt_balsam](../doc/docs.md#qt_balsam).
 * hello_rules/6_hello_rules`*` -- combines all the examples above in one.
 
 `*` example requires QtQuick3D and `balsam` tool to be available in Qt's installation.
+
+For direct `qt_qml_cc_module` usage, examples pass Qt deps explicitly to keep
+`qmltyperegistrar` foreign metatypes scoped. Convenience macros (`qt_cc_binary`,
+`qt_cc_library`) forward deps automatically.
 
 To run an example, one needs to run:
 ```
