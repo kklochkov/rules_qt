@@ -10,7 +10,7 @@ index 0000000000..e313716b60
 --- /dev/null
 +++ b/examples/qml/dynamicscene/BUILD
 @@ -0,0 +1,25 @@
-+load("@com_github_kklochkov_rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
++load("@rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
 +
 +qt_qrc(
 +    name = "data",
@@ -18,7 +18,7 @@ index 0000000000..e313716b60
 +    data = glob([
 +        "content/**/*",
 +        "**/*.qml",
-+    ]),
++    ], allow_empty = True),  # Optional assets vary by Qt package/version.
 +)
 +
 +qt_cc_binary(
@@ -41,14 +41,14 @@ index 0000000000..96f358371b
 --- /dev/null
 +++ b/examples/qml/networkaccessmanagerfactory/BUILD
 @@ -0,0 +1,23 @@
-+load("@com_github_kklochkov_rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
++load("@rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
 +
 +qt_qrc(
 +    name = "data",
 +    srcs = ["networkaccessmanagerfactory.qrc"],
 +    data = glob([
 +        "**/*.qml",
-+    ]),
++    ], allow_empty = True),  # Optional assets vary by Qt package/version.
 +)
 +
 +qt_cc_binary(
@@ -70,7 +70,7 @@ index 0000000000..e0ab7761a7
 --- /dev/null
 +++ b/examples/qml/referenceexamples/adding/BUILD
 @@ -0,0 +1,26 @@
-+load("@com_github_kklochkov_rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
++load("@rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
 +
 +qt_qrc(
 +    name = "data",
@@ -102,7 +102,7 @@ index 0000000000..4bb520c1d8
 --- /dev/null
 +++ b/examples/qml/referenceexamples/attached/BUILD
 @@ -0,0 +1,30 @@
-+load("@com_github_kklochkov_rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
++load("@rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
 +
 +qt_qrc(
 +    name = "data",
@@ -138,7 +138,7 @@ index 0000000000..98141eb6a8
 --- /dev/null
 +++ b/examples/qml/referenceexamples/binding/BUILD
 @@ -0,0 +1,32 @@
-+load("@com_github_kklochkov_rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
++load("@rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
 +
 +qt_qrc(
 +    name = "data",
@@ -176,7 +176,7 @@ index 0000000000..ec5d3b0db6
 --- /dev/null
 +++ b/examples/qml/referenceexamples/coercion/BUILD
 @@ -0,0 +1,30 @@
-+load("@com_github_kklochkov_rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
++load("@rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
 +
 +qt_qrc(
 +    name = "data",
@@ -212,7 +212,7 @@ index 0000000000..84bfff74e1
 --- /dev/null
 +++ b/examples/qml/referenceexamples/default/BUILD
 @@ -0,0 +1,30 @@
-+load("@com_github_kklochkov_rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
++load("@rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
 +
 +qt_qrc(
 +    name = "data",
@@ -248,7 +248,7 @@ index 0000000000..5bcfc23be6
 --- /dev/null
 +++ b/examples/qml/referenceexamples/extended/BUILD
 @@ -0,0 +1,27 @@
-+load("@com_github_kklochkov_rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
++load("@rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
 +
 +qt_qrc(
 +    name = "data",
@@ -281,7 +281,7 @@ index 0000000000..dad4d1ed7e
 --- /dev/null
 +++ b/examples/qml/referenceexamples/grouped/BUILD
 @@ -0,0 +1,30 @@
-+load("@com_github_kklochkov_rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
++load("@rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
 +
 +qt_qrc(
 +    name = "data",
@@ -317,7 +317,7 @@ index 0000000000..c39cfcc8b3
 --- /dev/null
 +++ b/examples/qml/referenceexamples/methods/BUILD
 @@ -0,0 +1,30 @@
-+load("@com_github_kklochkov_rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
++load("@rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
 +
 +qt_qrc(
 +    name = "data",
@@ -353,7 +353,7 @@ index 0000000000..f7dd837208
 --- /dev/null
 +++ b/examples/qml/referenceexamples/properties/BUILD
 @@ -0,0 +1,30 @@
-+load("@com_github_kklochkov_rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
++load("@rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
 +
 +qt_qrc(
 +    name = "data",
@@ -389,7 +389,7 @@ index 0000000000..03f73ac067
 --- /dev/null
 +++ b/examples/qml/referenceexamples/signal/BUILD
 @@ -0,0 +1,30 @@
-+load("@com_github_kklochkov_rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
++load("@rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
 +
 +qt_qrc(
 +    name = "data",
@@ -425,7 +425,7 @@ index 0000000000..4c63253564
 --- /dev/null
 +++ b/examples/qml/referenceexamples/valuesource/BUILD
 @@ -0,0 +1,32 @@
-+load("@com_github_kklochkov_rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
++load("@rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
 +
 +qt_qrc(
 +    name = "data",
@@ -463,7 +463,7 @@ index 0000000000..627056622b
 --- /dev/null
 +++ b/examples/qml/shell/BUILD
 @@ -0,0 +1,14 @@
-+load("@com_github_kklochkov_rules_qt//qt:defs.bzl", "qt_cc_binary")
++load("@rules_qt//qt:defs.bzl", "qt_cc_binary")
 +
 +qt_cc_binary(
 +    name = "shell",
@@ -483,7 +483,7 @@ index 0000000000..4d94da770a
 --- /dev/null
 +++ b/examples/qml/tutorials/extending-qml/chapter1-basics/BUILD
 @@ -0,0 +1,26 @@
-+load("@com_github_kklochkov_rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
++load("@rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
 +
 +qt_qrc(
 +    name = "data",
@@ -515,7 +515,7 @@ index 0000000000..bed1dbdc2c
 --- /dev/null
 +++ b/examples/qml/tutorials/extending-qml/chapter2-methods/BUILD
 @@ -0,0 +1,26 @@
-+load("@com_github_kklochkov_rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
++load("@rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
 +
 +qt_qrc(
 +    name = "data",
@@ -547,7 +547,7 @@ index 0000000000..150cd41e63
 --- /dev/null
 +++ b/examples/qml/tutorials/extending-qml/chapter3-bindings/BUILD
 @@ -0,0 +1,26 @@
-+load("@com_github_kklochkov_rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
++load("@rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
 +
 +qt_qrc(
 +    name = "data",
@@ -579,7 +579,7 @@ index 0000000000..68dd6d02e2
 --- /dev/null
 +++ b/examples/qml/tutorials/extending-qml/chapter4-customPropertyTypes/BUILD
 @@ -0,0 +1,30 @@
-+load("@com_github_kklochkov_rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
++load("@rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
 +
 +qt_qrc(
 +    name = "data",
@@ -615,7 +615,7 @@ index 0000000000..8da88622d1
 --- /dev/null
 +++ b/examples/qml/tutorials/extending-qml/chapter5-listproperties/BUILD
 @@ -0,0 +1,30 @@
-+load("@com_github_kklochkov_rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
++load("@rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
 +
 +qt_qrc(
 +    name = "data",
@@ -651,7 +651,7 @@ index 0000000000..9551dd87c1
 --- /dev/null
 +++ b/examples/qml/tutorials/extending-qml/chapter6-plugins/BUILD
 @@ -0,0 +1,35 @@
-+load("@com_github_kklochkov_rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_cc_library", "qt_qrc")
++load("@rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_cc_library", "qt_qrc")
 +
 +qt_cc_library(
 +    name = "charts",
@@ -692,7 +692,7 @@ index 0000000000..8219f30106
 --- /dev/null
 +++ b/examples/qml/xmlhttprequest/BUILD
 @@ -0,0 +1,26 @@
-+load("@com_github_kklochkov_rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
++load("@rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
 +
 +qt_qrc(
 +    name = "data",
@@ -701,7 +701,7 @@ index 0000000000..8219f30106
 +        "**/*.qml",
 +        "**/*.js",
 +        "**/*.xml",
-+    ]),
++    ], allow_empty = True),  # Optional assets vary by Qt package/version.
 +)
 +
 +qt_cc_binary(
@@ -724,7 +724,7 @@ index 0000000000..ef4bbae75b
 --- /dev/null
 +++ b/examples/quick/animation/BUILD
 @@ -0,0 +1,25 @@
-+load("@com_github_kklochkov_rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
++load("@rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
 +
 +qt_qrc(
 +    name = "data",
@@ -732,7 +732,7 @@ index 0000000000..ef4bbae75b
 +    data = glob([
 +        "**/*.qml",
 +        "**/*.png",
-+    ]),
++    ], allow_empty = True),  # Optional assets vary by Qt package/version.
 +)
 +
 +qt_cc_binary(
@@ -755,7 +755,7 @@ index 0000000000..fbcfd2c77c
 --- /dev/null
 +++ b/examples/quick/canvas/BUILD
 @@ -0,0 +1,26 @@
-+load("@com_github_kklochkov_rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
++load("@rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
 +
 +qt_qrc(
 +    name = "data",
@@ -764,7 +764,7 @@ index 0000000000..fbcfd2c77c
 +        "**/*.qml",
 +        "**/*.png",
 +        "**/*.js",
-+    ]),
++    ], allow_empty = True),  # Optional assets vary by Qt package/version.
 +)
 +
 +qt_cc_binary(
@@ -787,7 +787,7 @@ index 0000000000..d9c8c4ad37
 --- /dev/null
 +++ b/examples/quick/customitems/dialcontrol/BUILD
 @@ -0,0 +1,26 @@
-+load("@com_github_kklochkov_rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
++load("@rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
 +
 +qt_qrc(
 +    name = "data",
@@ -796,7 +796,7 @@ index 0000000000..d9c8c4ad37
 +        "**/*.qml",
 +        "**/*.png",
 +        "**/*.js",
-+    ]),
++    ], allow_empty = True),  # Optional assets vary by Qt package/version.
 +)
 +
 +qt_cc_binary(
@@ -819,7 +819,7 @@ index 0000000000..d8131c17ba
 --- /dev/null
 +++ b/examples/quick/customitems/flipable/BUILD
 @@ -0,0 +1,26 @@
-+load("@com_github_kklochkov_rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
++load("@rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
 +
 +qt_qrc(
 +    name = "data",
@@ -828,7 +828,7 @@ index 0000000000..d8131c17ba
 +        "**/*.qml",
 +        "**/*.png",
 +        "**/*.js",
-+    ]),
++    ], allow_empty = True),  # Optional assets vary by Qt package/version.
 +)
 +
 +qt_cc_binary(
@@ -851,7 +851,7 @@ index 0000000000..230879cd9d
 --- /dev/null
 +++ b/examples/quick/customitems/maskedmousearea/BUILD
 @@ -0,0 +1,30 @@
-+load("@com_github_kklochkov_rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
++load("@rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
 +
 +qt_qrc(
 +    name = "data",
@@ -860,7 +860,7 @@ index 0000000000..230879cd9d
 +        "**/*.qml",
 +        "**/*.png",
 +        "**/*.js",
-+    ]),
++    ], allow_empty = True),  # Optional assets vary by Qt package/version.
 +)
 +
 +qt_cc_binary(
@@ -887,7 +887,7 @@ index 0000000000..9cc6834181
 --- /dev/null
 +++ b/examples/quick/customitems/scrollbar/BUILD
 @@ -0,0 +1,26 @@
-+load("@com_github_kklochkov_rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
++load("@rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
 +
 +qt_qrc(
 +    name = "data",
@@ -896,7 +896,7 @@ index 0000000000..9cc6834181
 +        "**/*.qml",
 +        "**/*.png",
 +        "**/*.jpg",
-+    ]),
++    ], allow_empty = True),  # Optional assets vary by Qt package/version.
 +)
 +
 +qt_cc_binary(
@@ -919,7 +919,7 @@ index 0000000000..157073040d
 --- /dev/null
 +++ b/examples/quick/customitems/searchbox/BUILD
 @@ -0,0 +1,26 @@
-+load("@com_github_kklochkov_rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
++load("@rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
 +
 +qt_qrc(
 +    name = "data",
@@ -928,7 +928,7 @@ index 0000000000..157073040d
 +        "**/*.qml",
 +        "**/*.png",
 +        "**/*.jpg",
-+    ]),
++    ], allow_empty = True),  # Optional assets vary by Qt package/version.
 +)
 +
 +qt_cc_binary(
@@ -951,7 +951,7 @@ index 0000000000..70e4993055
 --- /dev/null
 +++ b/examples/quick/customitems/spinner/BUILD
 @@ -0,0 +1,26 @@
-+load("@com_github_kklochkov_rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
++load("@rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
 +
 +qt_qrc(
 +    name = "data",
@@ -960,7 +960,7 @@ index 0000000000..70e4993055
 +        "**/*.qml",
 +        "**/*.png",
 +        "**/*.jpg",
-+    ]),
++    ], allow_empty = True),  # Optional assets vary by Qt package/version.
 +)
 +
 +qt_cc_binary(
@@ -983,7 +983,7 @@ index 0000000000..0d3f42d621
 --- /dev/null
 +++ b/examples/quick/customitems/tabwidget/BUILD
 @@ -0,0 +1,26 @@
-+load("@com_github_kklochkov_rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
++load("@rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
 +
 +qt_qrc(
 +    name = "data",
@@ -992,7 +992,7 @@ index 0000000000..0d3f42d621
 +        "**/*.qml",
 +        "**/*.png",
 +        "**/*.jpg",
-+    ]),
++    ], allow_empty = True),  # Optional assets vary by Qt package/version.
 +)
 +
 +qt_cc_binary(
@@ -1015,7 +1015,7 @@ index 0000000000..0f2b359a97
 --- /dev/null
 +++ b/examples/quick/delegatechooser/BUILD
 @@ -0,0 +1,26 @@
-+load("@com_github_kklochkov_rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
++load("@rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
 +
 +qt_qrc(
 +    name = "data",
@@ -1024,7 +1024,7 @@ index 0000000000..0f2b359a97
 +        "**/*.qml",
 +        "**/*.png",
 +        "**/*.js",
-+    ]),
++    ], allow_empty = True),  # Optional assets vary by Qt package/version.
 +)
 +
 +qt_cc_binary(
@@ -1047,7 +1047,7 @@ index 0000000000..816448e2e8
 --- /dev/null
 +++ b/examples/quick/draganddrop/BUILD
 @@ -0,0 +1,26 @@
-+load("@com_github_kklochkov_rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
++load("@rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
 +
 +qt_qrc(
 +    name = "data",
@@ -1056,7 +1056,7 @@ index 0000000000..816448e2e8
 +        "**/*.qml",
 +        "**/*.png",
 +        "**/*.js",
-+    ]),
++    ], allow_empty = True),  # Optional assets vary by Qt package/version.
 +)
 +
 +qt_cc_binary(
@@ -1079,7 +1079,7 @@ index 0000000000..1ec2cf8970
 --- /dev/null
 +++ b/examples/quick/embeddedinwidgets/BUILD
 @@ -0,0 +1,25 @@
-+load("@com_github_kklochkov_rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
++load("@rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
 +
 +qt_qrc(
 +    name = "data",
@@ -1087,7 +1087,7 @@ index 0000000000..1ec2cf8970
 +    data = glob([
 +        "**/*.qml",
 +        "**/*.qsb",
-+    ]),
++    ], allow_empty = True),  # Optional assets vary by Qt package/version.
 +)
 +
 +qt_cc_binary(
@@ -1110,7 +1110,7 @@ index 0000000000..0958062291
 --- /dev/null
 +++ b/examples/quick/externaldraganddrop/BUILD
 @@ -0,0 +1,26 @@
-+load("@com_github_kklochkov_rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
++load("@rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
 +
 +qt_qrc(
 +    name = "data",
@@ -1119,7 +1119,7 @@ index 0000000000..0958062291
 +        "**/*.qml",
 +        "**/*.png",
 +        "**/*.js",
-+    ]),
++    ], allow_empty = True),  # Optional assets vary by Qt package/version.
 +)
 +
 +qt_cc_binary(
@@ -1142,7 +1142,7 @@ index 0000000000..29d4f6c51f
 --- /dev/null
 +++ b/examples/quick/imageelements/BUILD
 @@ -0,0 +1,25 @@
-+load("@com_github_kklochkov_rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
++load("@rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
 +
 +qt_qrc(
 +    name = "data",
@@ -1150,7 +1150,7 @@ index 0000000000..29d4f6c51f
 +    data = glob([
 +        "content/*",
 +        "**/*.qml",
-+    ]),
++    ], allow_empty = True),  # Optional assets vary by Qt package/version.
 +)
 +
 +qt_cc_binary(
@@ -1173,7 +1173,7 @@ index 0000000000..6966f39771
 --- /dev/null
 +++ b/examples/quick/keyinteraction/BUILD
 @@ -0,0 +1,26 @@
-+load("@com_github_kklochkov_rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
++load("@rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
 +
 +qt_qrc(
 +    name = "data",
@@ -1182,7 +1182,7 @@ index 0000000000..6966f39771
 +        "**/*.qml",
 +        "**/*.png",
 +        "**/*.js",
-+    ]),
++    ], allow_empty = True),  # Optional assets vary by Qt package/version.
 +)
 +
 +qt_cc_binary(
@@ -1205,14 +1205,14 @@ index 0000000000..b981a6dcc7
 --- /dev/null
 +++ b/examples/quick/layouts/BUILD
 @@ -0,0 +1,23 @@
-+load("@com_github_kklochkov_rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
++load("@rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
 +
 +qt_qrc(
 +    name = "data",
 +    srcs = ["layouts.qrc"],
 +    data = glob([
 +        "**/*.qml",
-+    ]),
++    ], allow_empty = True),  # Optional assets vary by Qt package/version.
 +)
 +
 +qt_cc_binary(
@@ -1234,7 +1234,7 @@ index 0000000000..b9caa274e9
 --- /dev/null
 +++ b/examples/quick/localstorage/localstorage/BUILD
 @@ -0,0 +1,24 @@
-+load("@com_github_kklochkov_rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
++load("@rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
 +
 +qt_qrc(
 +    name = "data",
@@ -1242,7 +1242,7 @@ index 0000000000..b9caa274e9
 +    data = glob([
 +        "**/*.qml",
 +        "**/*.js",
-+    ]),
++    ], allow_empty = True),  # Optional assets vary by Qt package/version.
 +)
 +
 +qt_cc_binary(
@@ -1264,7 +1264,7 @@ index 0000000000..eae3687285
 --- /dev/null
 +++ b/examples/quick/models/abstractitemmodel/BUILD
 @@ -0,0 +1,28 @@
-+load("@com_github_kklochkov_rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
++load("@rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
 +
 +qt_qrc(
 +    name = "data",
@@ -1272,7 +1272,7 @@ index 0000000000..eae3687285
 +    data = glob([
 +        "**/*.qml",
 +        "**/*.js",
-+    ]),
++    ], allow_empty = True),  # Optional assets vary by Qt package/version.
 +)
 +
 +qt_cc_binary(
@@ -1298,7 +1298,7 @@ index 0000000000..73da6c236b
 --- /dev/null
 +++ b/examples/quick/models/objectlistmodel/BUILD
 @@ -0,0 +1,28 @@
-+load("@com_github_kklochkov_rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
++load("@rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
 +
 +qt_qrc(
 +    name = "data",
@@ -1306,7 +1306,7 @@ index 0000000000..73da6c236b
 +    data = glob([
 +        "**/*.qml",
 +        "**/*.js",
-+    ]),
++    ], allow_empty = True),  # Optional assets vary by Qt package/version.
 +)
 +
 +qt_cc_binary(
@@ -1332,7 +1332,7 @@ index 0000000000..611817f14c
 --- /dev/null
 +++ b/examples/quick/models/stringlistmodel/BUILD
 @@ -0,0 +1,24 @@
-+load("@com_github_kklochkov_rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
++load("@rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
 +
 +qt_qrc(
 +    name = "data",
@@ -1340,7 +1340,7 @@ index 0000000000..611817f14c
 +    data = glob([
 +        "**/*.qml",
 +        "**/*.png",
-+    ]),
++    ], allow_empty = True),  # Optional assets vary by Qt package/version.
 +)
 +
 +qt_cc_binary(
@@ -1362,7 +1362,7 @@ index 0000000000..9070c0658a
 --- /dev/null
 +++ b/examples/quick/mousearea/BUILD
 @@ -0,0 +1,26 @@
-+load("@com_github_kklochkov_rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
++load("@rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
 +
 +qt_qrc(
 +    name = "data",
@@ -1371,7 +1371,7 @@ index 0000000000..9070c0658a
 +        "**/*.qml",
 +        "**/*.png",
 +        "**/*.js",
-+    ]),
++    ], allow_empty = True),  # Optional assets vary by Qt package/version.
 +)
 +
 +qt_cc_binary(
@@ -1394,7 +1394,7 @@ index 0000000000..7192a7245c
 --- /dev/null
 +++ b/examples/quick/particles/BUILD
 @@ -0,0 +1,17 @@
-+load("@com_github_kklochkov_rules_qt//qt:defs.bzl", "qt_cc_library", "qt_qrc")
++load("@rules_qt//qt:defs.bzl", "qt_cc_library", "qt_qrc")
 +
 +package(default_visibility = ["//visibility:public"])
 +
@@ -1404,7 +1404,7 @@ index 0000000000..7192a7245c
 +    data = glob([
 +        "images/*.png",
 +        "images/*.jpg",
-+    ]),
++    ], allow_empty = True),  # Optional assets vary by Qt package/version.
 +)
 +
 +qt_cc_library(
@@ -1417,7 +1417,7 @@ index 0000000000..706f0e9834
 --- /dev/null
 +++ b/examples/quick/particles/affectors/BUILD
 @@ -0,0 +1,28 @@
-+load("@com_github_kklochkov_rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
++load("@rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
 +
 +qt_qrc(
 +    name = "data",
@@ -1427,7 +1427,7 @@ index 0000000000..706f0e9834
 +        "**/*.png",
 +        "**/*.js",
 +        "**/*.jpg",
-+    ]),
++    ], allow_empty = True),  # Optional assets vary by Qt package/version.
 +)
 +
 +qt_cc_binary(
@@ -1451,7 +1451,7 @@ index 0000000000..f23bab4df6
 --- /dev/null
 +++ b/examples/quick/particles/customparticle/BUILD
 @@ -0,0 +1,27 @@
-+load("@com_github_kklochkov_rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
++load("@rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
 +
 +qt_qrc(
 +    name = "data",
@@ -1460,7 +1460,7 @@ index 0000000000..f23bab4df6
 +        "**/*.qml",
 +        "**/*.png",
 +        "**/*.js",
-+    ]),
++    ], allow_empty = True),  # Optional assets vary by Qt package/version.
 +)
 +
 +qt_cc_binary(
@@ -1484,7 +1484,7 @@ index 0000000000..6230cc1ce0
 --- /dev/null
 +++ b/examples/quick/particles/emitters/BUILD
 @@ -0,0 +1,27 @@
-+load("@com_github_kklochkov_rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
++load("@rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
 +
 +qt_qrc(
 +    name = "data",
@@ -1493,7 +1493,7 @@ index 0000000000..6230cc1ce0
 +        "**/*.qml",
 +        "**/*.png",
 +        "**/*.js",
-+    ]),
++    ], allow_empty = True),  # Optional assets vary by Qt package/version.
 +)
 +
 +qt_cc_binary(
@@ -1517,7 +1517,7 @@ index 0000000000..efe0105d70
 --- /dev/null
 +++ b/examples/quick/particles/imageparticle/BUILD
 @@ -0,0 +1,27 @@
-+load("@com_github_kklochkov_rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
++load("@rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
 +
 +qt_qrc(
 +    name = "data",
@@ -1526,7 +1526,7 @@ index 0000000000..efe0105d70
 +        "**/*.qml",
 +        "**/*.png",
 +        "**/*.js",
-+    ]),
++    ], allow_empty = True),  # Optional assets vary by Qt package/version.
 +)
 +
 +qt_cc_binary(
@@ -1550,7 +1550,7 @@ index 0000000000..dfb9c5c066
 --- /dev/null
 +++ b/examples/quick/particles/itemparticle/BUILD
 @@ -0,0 +1,27 @@
-+load("@com_github_kklochkov_rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
++load("@rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
 +
 +qt_qrc(
 +    name = "data",
@@ -1559,7 +1559,7 @@ index 0000000000..dfb9c5c066
 +        "**/*.qml",
 +        "**/*.png",
 +        "**/*.js",
-+    ]),
++    ], allow_empty = True),  # Optional assets vary by Qt package/version.
 +)
 +
 +qt_cc_binary(
@@ -1600,7 +1600,7 @@ index 0000000000..31b5aeaa56
 --- /dev/null
 +++ b/examples/quick/particles/system/BUILD
 @@ -0,0 +1,27 @@
-+load("@com_github_kklochkov_rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
++load("@rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
 +
 +qt_qrc(
 +    name = "data",
@@ -1609,7 +1609,7 @@ index 0000000000..31b5aeaa56
 +        "**/*.qml",
 +        "**/*.png",
 +        "**/*.js",
-+    ]),
++    ], allow_empty = True),  # Optional assets vary by Qt package/version.
 +)
 +
 +qt_cc_binary(
@@ -1633,7 +1633,7 @@ index 0000000000..2bacef95c6
 --- /dev/null
 +++ b/examples/quick/positioners/BUILD
 @@ -0,0 +1,26 @@
-+load("@com_github_kklochkov_rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
++load("@rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
 +
 +qt_qrc(
 +    name = "data",
@@ -1642,7 +1642,7 @@ index 0000000000..2bacef95c6
 +        "**/*.qml",
 +        "**/*.png",
 +        "**/*.js",
-+    ]),
++    ], allow_empty = True),  # Optional assets vary by Qt package/version.
 +)
 +
 +qt_cc_binary(
@@ -1665,7 +1665,7 @@ index 0000000000..4ced2c4f14
 --- /dev/null
 +++ b/examples/quick/quick-accessibility/BUILD
 @@ -0,0 +1,26 @@
-+load("@com_github_kklochkov_rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
++load("@rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
 +
 +qt_qrc(
 +    name = "data",
@@ -1674,7 +1674,7 @@ index 0000000000..4ced2c4f14
 +        "**/*.qml",
 +        "**/*.png",
 +        "**/*.js",
-+    ]),
++    ], allow_empty = True),  # Optional assets vary by Qt package/version.
 +)
 +
 +qt_cc_binary(
@@ -1697,7 +1697,7 @@ index 0000000000..d4e5a0dfa7
 --- /dev/null
 +++ b/examples/quick/quickwidgets/qquickviewcomparison/BUILD
 @@ -0,0 +1,38 @@
-+load("@com_github_kklochkov_rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
++load("@rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
 +
 +qt_qrc(
 +    name = "data",
@@ -1707,7 +1707,7 @@ index 0000000000..d4e5a0dfa7
 +        "**/*.png",
 +        "**/*.js",
 +        "**/*.qsb",
-+    ]),
++    ], allow_empty = True),  # Optional assets vary by Qt package/version.
 +)
 +
 +qt_cc_binary(
@@ -1741,7 +1741,7 @@ index 0000000000..6e8ae3f262
 --- /dev/null
 +++ b/examples/quick/quickwidgets/quickwidget/BUILD
 @@ -0,0 +1,30 @@
-+load("@com_github_kklochkov_rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
++load("@rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
 +
 +qt_qrc(
 +    name = "data",
@@ -1750,7 +1750,7 @@ index 0000000000..6e8ae3f262
 +        "**/*.qml",
 +        "**/*.png",
 +        "**/*.js",
-+    ]),
++    ], allow_empty = True),  # Optional assets vary by Qt package/version.
 +)
 +
 +qt_cc_binary(
@@ -1777,7 +1777,7 @@ index 0000000000..59c0f85974
 --- /dev/null
 +++ b/examples/quick/rendercontrol/BUILD
 @@ -0,0 +1,36 @@
-+load("@com_github_kklochkov_rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
++load("@rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
 +
 +qt_qrc(
 +    name = "data",
@@ -1786,7 +1786,7 @@ index 0000000000..59c0f85974
 +        "**/*.qml",
 +        "**/*.png",
 +        "**/*.js",
-+    ]),
++    ], allow_empty = True),  # Optional assets vary by Qt package/version.
 +)
 +
 +qt_cc_binary(
@@ -1819,7 +1819,7 @@ index 0000000000..317c804668
 --- /dev/null
 +++ b/examples/quick/righttoleft/BUILD
 @@ -0,0 +1,26 @@
-+load("@com_github_kklochkov_rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
++load("@rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
 +
 +qt_qrc(
 +    name = "data",
@@ -1828,7 +1828,7 @@ index 0000000000..317c804668
 +        "**/*.qml",
 +        "**/*.png",
 +        "**/*.js",
-+    ]),
++    ], allow_empty = True),  # Optional assets vary by Qt package/version.
 +)
 +
 +qt_cc_binary(
@@ -1851,14 +1851,14 @@ index 0000000000..68fd43d90b
 --- /dev/null
 +++ b/examples/quick/scenegraph/customgeometry/BUILD
 @@ -0,0 +1,30 @@
-+load("@com_github_kklochkov_rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
++load("@rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
 +
 +qt_qrc(
 +    name = "data",
 +    srcs = ["customgeometry.qrc"],
 +    data = glob([
 +        "**/*.qml",
-+    ]),
++    ], allow_empty = True),  # Optional assets vary by Qt package/version.
 +)
 +
 +qt_cc_binary(
@@ -1887,7 +1887,7 @@ index 0000000000..0e326e04ac
 --- /dev/null
 +++ b/examples/quick/scenegraph/fboitem/BUILD
 @@ -0,0 +1,32 @@
-+load("@com_github_kklochkov_rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
++load("@rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
 +
 +qt_qrc(
 +    name = "data",
@@ -1895,7 +1895,7 @@ index 0000000000..0e326e04ac
 +    data = glob([
 +        "**/*.qml",
 +        "**/*.frag",
-+    ]),
++    ], allow_empty = True),  # Optional assets vary by Qt package/version.
 +)
 +
 +qt_cc_binary(
@@ -1925,7 +1925,7 @@ index 0000000000..1f1b76da4c
 --- /dev/null
 +++ b/examples/quick/scenegraph/graph/BUILD
 @@ -0,0 +1,38 @@
-+load("@com_github_kklochkov_rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
++load("@rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
 +
 +qt_qrc(
 +    name = "data",
@@ -1934,7 +1934,7 @@ index 0000000000..1f1b76da4c
 +        "**/*.qml",
 +        "**/*.fsh",
 +        "**/*.vsh",
-+    ]),
++    ], allow_empty = True),  # Optional assets vary by Qt package/version.
 +)
 +
 +qt_cc_binary(
@@ -1969,7 +1969,7 @@ index 0000000000..5403388a5a
 --- /dev/null
 +++ b/examples/quick/scenegraph/openglunderqml/BUILD
 @@ -0,0 +1,31 @@
-+load("@com_github_kklochkov_rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
++load("@rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
 +
 +qt_qrc(
 +    name = "data",
@@ -1977,7 +1977,7 @@ index 0000000000..5403388a5a
 +    data = glob([
 +        "**/*.qml",
 +        "**/*.qsb",
-+    ]),
++    ], allow_empty = True),  # Optional assets vary by Qt package/version.
 +)
 +
 +qt_cc_binary(
@@ -2006,14 +2006,14 @@ index 0000000000..e1e9bb189c
 --- /dev/null
 +++ b/examples/quick/scenegraph/sgengine/BUILD
 @@ -0,0 +1,30 @@
-+load("@com_github_kklochkov_rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
++load("@rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
 +
 +qt_qrc(
 +    name = "data",
 +    srcs = ["sgengine.qrc"],
 +    data = glob([
 +        "**/*.png",
-+    ]),
++    ], allow_empty = True),  # Optional assets vary by Qt package/version.
 +)
 +
 +qt_cc_binary(
@@ -2042,7 +2042,7 @@ index 0000000000..e0a1caa31b
 --- /dev/null
 +++ b/examples/quick/scenegraph/shared/BUILD
 @@ -0,0 +1,15 @@
-+load("@com_github_kklochkov_rules_qt//qt:defs.bzl", "qt_cc_library")
++load("@rules_qt//qt:defs.bzl", "qt_cc_library")
 +
 +package(default_visibility = ["//visibility:public"])
 +
@@ -2063,7 +2063,7 @@ index 0000000000..bac2ad8a58
 --- /dev/null
 +++ b/examples/quick/scenegraph/simplematerial/BUILD
 @@ -0,0 +1,31 @@
-+load("@com_github_kklochkov_rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
++load("@rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
 +
 +qt_qrc(
 +    name = "data",
@@ -2071,7 +2071,7 @@ index 0000000000..bac2ad8a58
 +    data = glob([
 +        "**/*.qml",
 +        "**/*.qsb",
-+    ]),
++    ], allow_empty = True),  # Optional assets vary by Qt package/version.
 +)
 +
 +qt_cc_binary(
@@ -2100,7 +2100,7 @@ index 0000000000..566416bca2
 --- /dev/null
 +++ b/examples/quick/scenegraph/threadedanimation/BUILD
 @@ -0,0 +1,29 @@
-+load("@com_github_kklochkov_rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
++load("@rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
 +
 +qt_qrc(
 +    name = "data",
@@ -2108,7 +2108,7 @@ index 0000000000..566416bca2
 +    data = glob([
 +        "**/*.qml",
 +        "**/*.png",
-+    ]),
++    ], allow_empty = True),  # Optional assets vary by Qt package/version.
 +)
 +
 +qt_cc_binary(
@@ -2135,7 +2135,7 @@ index 0000000000..adf79d4ae7
 --- /dev/null
 +++ b/examples/quick/scenegraph/twotextureproviders/BUILD
 @@ -0,0 +1,30 @@
-+load("@com_github_kklochkov_rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
++load("@rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
 +
 +qt_qrc(
 +    name = "data",
@@ -2144,7 +2144,7 @@ index 0000000000..adf79d4ae7
 +        "**/*.qml",
 +        "**/*.vert",
 +        "**/*.frag",
-+    ]),
++    ], allow_empty = True),  # Optional assets vary by Qt package/version.
 +)
 +
 +qt_cc_binary(
@@ -2171,7 +2171,7 @@ index 0000000000..e9479107dd
 --- /dev/null
 +++ b/examples/quick/shadereffects/BUILD
 @@ -0,0 +1,29 @@
-+load("@com_github_kklochkov_rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
++load("@rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
 +
 +qt_qrc(
 +    name = "data",
@@ -2181,7 +2181,7 @@ index 0000000000..e9479107dd
 +        "**/*.vert",
 +        "**/*.frag",
 +        "**/*.png",
-+    ]),
++    ], allow_empty = True),  # Optional assets vary by Qt package/version.
 +)
 +
 +qt_cc_binary(
@@ -2206,7 +2206,7 @@ index 0000000000..436132d23b
 --- /dev/null
 +++ b/examples/quick/shapes/BUILD
 @@ -0,0 +1,28 @@
-+load("@com_github_kklochkov_rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
++load("@rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
 +
 +qt_qrc(
 +    name = "data",
@@ -2215,7 +2215,7 @@ index 0000000000..436132d23b
 +        "**/*.qml",
 +        "**/*.png",
 +        "**/*.js",
-+    ]) + [
++    ], allow_empty = True) + [  # Optional assets vary by Qt package/version.
 +        "//{root}/shared:qml_module".format(root = package_name().rstrip("/shapes")),
 +    ],
 +)
@@ -2240,7 +2240,7 @@ index 0000000000..420d6255e7
 --- /dev/null
 +++ b/examples/quick/shared/BUILD
 @@ -0,0 +1,26 @@
-+load("@com_github_kklochkov_rules_qt//qt:defs.bzl", "qt_cc_library", "qt_qml_import", "qt_qrc")
++load("@rules_qt//qt:defs.bzl", "qt_cc_library", "qt_qml_import", "qt_qrc")
 +
 +package(default_visibility = ["//visibility:public"])
 +
@@ -2272,7 +2272,7 @@ index 0000000000..311b92ca2f
 --- /dev/null
 +++ b/examples/quick/tableview/gameoflife/BUILD
 @@ -0,0 +1,30 @@
-+load("@com_github_kklochkov_rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
++load("@rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
 +
 +qt_qrc(
 +    name = "data",
@@ -2280,7 +2280,7 @@ index 0000000000..311b92ca2f
 +    data = glob([
 +        "**/*.qml",
 +        "gosperglidergun.cells",
-+    ]),
++    ], allow_empty = True),  # Optional assets vary by Qt package/version.
 +)
 +
 +qt_cc_binary(
@@ -2320,14 +2320,14 @@ index 0000000000..0e9bc5239e
 --- /dev/null
 +++ b/examples/quick/tableview/pixelator/BUILD
 @@ -0,0 +1,28 @@
-+load("@com_github_kklochkov_rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
++load("@rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
 +
 +qt_qrc(
 +    name = "data",
 +    data = glob([
 +        "**/*.qml",
 +        "**/*.png",
-+    ]),
++    ], allow_empty = True),  # Optional assets vary by Qt package/version.
 +)
 +
 +qt_cc_binary(
@@ -2354,7 +2354,7 @@ index 0000000000..90bc7706b9
 --- /dev/null
 +++ b/examples/quick/text/BUILD
 @@ -0,0 +1,27 @@
-+load("@com_github_kklochkov_rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
++load("@rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
 +
 +qt_qrc(
 +    name = "data",
@@ -2364,7 +2364,7 @@ index 0000000000..90bc7706b9
 +        "**/*.png",
 +        "**/*.ttf",
 +        "**/*.sci",
-+    ]),
++    ], allow_empty = True),  # Optional assets vary by Qt package/version.
 +)
 +
 +qt_cc_binary(
@@ -2387,7 +2387,7 @@ index 0000000000..5717b27010
 --- /dev/null
 +++ b/examples/quick/textureprovider/BUILD
 @@ -0,0 +1,29 @@
-+load("@com_github_kklochkov_rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
++load("@rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
 +
 +qt_qrc(
 +    name = "data",
@@ -2396,7 +2396,7 @@ index 0000000000..5717b27010
 +        "**/*.qml",
 +        "**/*.jpg",
 +        "**/*.pkm",
-+    ]),
++    ], allow_empty = True),  # Optional assets vary by Qt package/version.
 +)
 +
 +qt_cc_binary(
@@ -2422,7 +2422,7 @@ index 0000000000..e553d4cf8f
 --- /dev/null
 +++ b/examples/quick/threading/BUILD
 @@ -0,0 +1,26 @@
-+load("@com_github_kklochkov_rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
++load("@rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
 +
 +qt_qrc(
 +    name = "data",
@@ -2431,7 +2431,7 @@ index 0000000000..e553d4cf8f
 +        "**/*.qml",
 +        "**/*.png",
 +        "**/*.mjs",
-+    ]),
++    ], allow_empty = True),  # Optional assets vary by Qt package/version.
 +)
 +
 +qt_cc_binary(
@@ -2454,7 +2454,7 @@ index 0000000000..74f2322687
 --- /dev/null
 +++ b/examples/quick/touchinteraction/BUILD
 @@ -0,0 +1,26 @@
-+load("@com_github_kklochkov_rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
++load("@rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
 +
 +qt_qrc(
 +    name = "data",
@@ -2463,7 +2463,7 @@ index 0000000000..74f2322687
 +        "**/*.qml",
 +        "**/*.png",
 +        "**/*.jpg",
-+    ]),
++    ], allow_empty = True),  # Optional assets vary by Qt package/version.
 +)
 +
 +qt_cc_binary(
@@ -2486,14 +2486,14 @@ index 0000000000..c05eb1955e
 --- /dev/null
 +++ b/examples/quick/tutorials/dynamicview/dynamicview1/BUILD
 @@ -0,0 +1,24 @@
-+load("@com_github_kklochkov_rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
++load("@rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
 +
 +qt_qrc(
 +    name = "data",
 +    srcs = ["dynamicview1.qrc"],
 +    data = glob([
 +        "**/*.qml",
-+    ]),
++    ], allow_empty = True),  # Optional assets vary by Qt package/version.
 +)
 +
 +qt_cc_binary(
@@ -2516,14 +2516,14 @@ index 0000000000..e22f471d29
 --- /dev/null
 +++ b/examples/quick/tutorials/dynamicview/dynamicview2/BUILD
 @@ -0,0 +1,24 @@
-+load("@com_github_kklochkov_rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
++load("@rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
 +
 +qt_qrc(
 +    name = "data",
 +    srcs = ["dynamicview2.qrc"],
 +    data = glob([
 +        "**/*.qml",
-+    ]),
++    ], allow_empty = True),  # Optional assets vary by Qt package/version.
 +)
 +
 +qt_cc_binary(
@@ -2546,14 +2546,14 @@ index 0000000000..1d8538f6d1
 --- /dev/null
 +++ b/examples/quick/tutorials/dynamicview/dynamicview3/BUILD
 @@ -0,0 +1,24 @@
-+load("@com_github_kklochkov_rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
++load("@rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
 +
 +qt_qrc(
 +    name = "data",
 +    srcs = ["dynamicview3.qrc"],
 +    data = glob([
 +        "**/*.qml",
-+    ]),
++    ], allow_empty = True),  # Optional assets vary by Qt package/version.
 +)
 +
 +qt_cc_binary(
@@ -2576,13 +2576,13 @@ index 0000000000..ee90dfc622
 --- /dev/null
 +++ b/examples/quick/tutorials/dynamicview/dynamicview4/BUILD
 @@ -0,0 +1,23 @@
-+load("@com_github_kklochkov_rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
++load("@rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
 +
 +qt_qrc(
 +    name = "data",
 +    data = glob([
 +        "**/*.qml",
-+    ]),
++    ], allow_empty = True),  # Optional assets vary by Qt package/version.
 +)
 +
 +qt_cc_binary(
@@ -2605,7 +2605,7 @@ index 0000000000..dfa0dc2b51
 --- /dev/null
 +++ b/examples/quick/tutorials/samegame/samegame1/BUILD
 @@ -0,0 +1,27 @@
-+load("@com_github_kklochkov_rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
++load("@rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
 +
 +qt_qrc(
 +    name = "data",
@@ -2614,7 +2614,7 @@ index 0000000000..dfa0dc2b51
 +        "**/*.qml",
 +        "**/*.png",
 +        "**/*.jpg",
-+    ]),
++    ], allow_empty = True),  # Optional assets vary by Qt package/version.
 +)
 +
 +qt_cc_binary(
@@ -2638,7 +2638,7 @@ index 0000000000..453f2500c5
 --- /dev/null
 +++ b/examples/quick/tutorials/samegame/samegame2/BUILD
 @@ -0,0 +1,28 @@
-+load("@com_github_kklochkov_rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
++load("@rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
 +
 +qt_qrc(
 +    name = "data",
@@ -2648,7 +2648,7 @@ index 0000000000..453f2500c5
 +        "**/*.png",
 +        "**/*.jpg",
 +        "**/*.js",
-+    ]),
++    ], allow_empty = True),  # Optional assets vary by Qt package/version.
 +)
 +
 +qt_cc_binary(
@@ -2672,7 +2672,7 @@ index 0000000000..f417a06eb4
 --- /dev/null
 +++ b/examples/quick/tutorials/samegame/samegame3/BUILD
 @@ -0,0 +1,27 @@
-+load("@com_github_kklochkov_rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
++load("@rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
 +
 +qt_qrc(
 +    name = "data",
@@ -2681,7 +2681,7 @@ index 0000000000..f417a06eb4
 +        "**/*.png",
 +        "**/*.jpg",
 +        "**/*.js",
-+    ]),
++    ], allow_empty = True),  # Optional assets vary by Qt package/version.
 +)
 +
 +qt_cc_binary(
@@ -2705,7 +2705,7 @@ index 0000000000..574656301d
 --- /dev/null
 +++ b/examples/quick/tutorials/samegame/samegame4/BUILD
 @@ -0,0 +1,32 @@
-+load("@com_github_kklochkov_rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
++load("@rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
 +
 +qt_qrc(
 +    name = "data",
@@ -2719,7 +2719,7 @@ index 0000000000..574656301d
 +        "**/*.xml",
 +        "**/*.xsl",
 +        "**/*.php",
-+    ]),
++    ], allow_empty = True),  # Optional assets vary by Qt package/version.
 +)
 +
 +qt_cc_binary(
@@ -2743,7 +2743,7 @@ index 0000000000..6e618d3a50
 --- /dev/null
 +++ b/examples/quick/tutorials/samegame/shared/pics/BUILD
 @@ -0,0 +1,17 @@
-+load("@com_github_kklochkov_rules_qt//qt:defs.bzl", "qt_cc_library", "qt_qrc")
++load("@rules_qt//qt:defs.bzl", "qt_cc_library", "qt_qrc")
 +
 +package(default_visibility = ["//visibility:public"])
 +
@@ -2753,7 +2753,7 @@ index 0000000000..6e618d3a50
 +    data = glob([
 +        "*.png",
 +        "*.jpg",
-+    ]),
++    ], allow_empty = True),  # Optional assets vary by Qt package/version.
 +)
 +
 +qt_cc_library(
@@ -2766,7 +2766,7 @@ index 0000000000..fed6036ccd
 --- /dev/null
 +++ b/examples/quick/views/BUILD
 @@ -0,0 +1,26 @@
-+load("@com_github_kklochkov_rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
++load("@rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
 +
 +qt_qrc(
 +    name = "data",
@@ -2775,7 +2775,7 @@ index 0000000000..fed6036ccd
 +        "**/*.qml",
 +        "**/*.png",
 +        "**/*.jpg",
-+    ]),
++    ], allow_empty = True),  # Optional assets vary by Qt package/version.
 +)
 +
 +qt_cc_binary(
@@ -2798,7 +2798,7 @@ index 0000000000..8228150671
 --- /dev/null
 +++ b/examples/quick/window/BUILD
 @@ -0,0 +1,28 @@
-+load("@com_github_kklochkov_rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
++load("@rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
 +
 +qt_qrc(
 +    name = "data",
@@ -2809,7 +2809,7 @@ index 0000000000..8228150671
 +        "**/*.svg",
 +        "**/*.icns",
 +        "**/*.ico",
-+    ]),
++    ], allow_empty = True),  # Optional assets vary by Qt package/version.
 +)
 +
 +qt_cc_binary(

@@ -4,7 +4,7 @@ index 00000000..5da9f1d4
 --- /dev/null
 +++ b/examples/quick3d/antialiasing/BUILD
 @@ -0,0 +1,24 @@
-+load("@com_github_kklochkov_rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
++load("@rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
 +
 +qt_qrc(
 +    name = "data",
@@ -34,7 +34,7 @@ index 00000000..6dc75cf7
 --- /dev/null
 +++ b/examples/quick3d/custommaterial/BUILD
 @@ -0,0 +1,29 @@
-+load("@com_github_kklochkov_rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
++load("@rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
 +
 +qt_qrc(
 +    name = "data",
@@ -69,7 +69,7 @@ index 00000000..4d2440c7
 --- /dev/null
 +++ b/examples/quick3d/customshaders/BUILD
 @@ -0,0 +1,26 @@
-+load("@com_github_kklochkov_rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
++load("@rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
 +
 +qt_qrc(
 +    name = "data",
@@ -101,7 +101,7 @@ index 00000000..c43de436
 --- /dev/null
 +++ b/examples/quick3d/dynamiccreation/BUILD
 @@ -0,0 +1,25 @@
-+load("@com_github_kklochkov_rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
++load("@rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
 +
 +qt_qrc(
 +    name = "data",
@@ -132,7 +132,7 @@ index 00000000..1fade35d
 --- /dev/null
 +++ b/examples/quick3d/dynamictexture/BUILD
 @@ -0,0 +1,27 @@
-+load("@com_github_kklochkov_rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
++load("@rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
 +
 +qt_qrc(
 +    name = "data",
@@ -165,7 +165,7 @@ index 00000000..76316f53
 --- /dev/null
 +++ b/examples/quick3d/effects/BUILD
 @@ -0,0 +1,24 @@
-+load("@com_github_kklochkov_rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
++load("@rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
 +
 +qt_qrc(
 +    name = "data",
@@ -195,7 +195,7 @@ index 00000000..e43ef58b
 --- /dev/null
 +++ b/examples/quick3d/hellocube/BUILD
 @@ -0,0 +1,25 @@
-+load("@com_github_kklochkov_rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
++load("@rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
 +
 +qt_qrc(
 +    name = "data",
@@ -226,7 +226,7 @@ index 00000000..51e0d2b9
 --- /dev/null
 +++ b/examples/quick3d/lights/BUILD
 @@ -0,0 +1,25 @@
-+load("@com_github_kklochkov_rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
++load("@rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
 +
 +qt_qrc(
 +    name = "data",
@@ -257,7 +257,7 @@ index 00000000..a5fd9bcc
 --- /dev/null
 +++ b/examples/quick3d/picking/BUILD
 @@ -0,0 +1,28 @@
-+load("@com_github_kklochkov_rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
++load("@rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
 +
 +qt_qrc(
 +    name = "data",
@@ -291,7 +291,7 @@ index 00000000..247ec29c
 --- /dev/null
 +++ b/examples/quick3d/principledmaterial/BUILD
 @@ -0,0 +1,29 @@
-+load("@com_github_kklochkov_rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
++load("@rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
 +
 +qt_qrc(
 +    name = "data",
@@ -326,7 +326,7 @@ index 00000000..6ddd7d6a
 --- /dev/null
 +++ b/examples/quick3d/quickitems/BUILD
 @@ -0,0 +1,25 @@
-+load("@com_github_kklochkov_rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
++load("@rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
 +
 +qt_qrc(
 +    name = "data",
@@ -357,7 +357,7 @@ index 00000000..23fc9152
 --- /dev/null
 +++ b/examples/quick3d/simple/BUILD
 @@ -0,0 +1,24 @@
-+load("@com_github_kklochkov_rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
++load("@rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
 +
 +qt_qrc(
 +    name = "data",
@@ -387,7 +387,7 @@ index 00000000..f04df982
 --- /dev/null
 +++ b/examples/quick3d/view3d/BUILD
 @@ -0,0 +1,25 @@
-+load("@com_github_kklochkov_rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
++load("@rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_qrc")
 +
 +qt_qrc(
 +    name = "data",

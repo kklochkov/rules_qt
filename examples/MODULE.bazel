@@ -1,0 +1,163 @@
+module(name = "com_github_kklochkov_rules_qt_examples")
+
+bazel_dep(name = "rules_qt", version = "2.0.0")
+bazel_dep(name = "rules_cc", version = "0.1.1")
+local_path_override(
+    module_name = "rules_qt",
+    path = "..",
+)
+
+http_archive = use_repo_rule("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
+http_files = use_repo_rule("//:http_files.bzl", "http_files")
+
+qt = use_extension("@rules_qt//qt:extensions.bzl", "qt")
+
+# Local Qt candidates with platform-conditional paths.
+qt.local_repo(
+    name = "qt5_local",
+    paths = {
+        "macos-arm64": "/opt/homebrew/opt/qt@5",
+        "linux-x86_64": "/usr/lib/x86_64-linux-gnu/qt5",
+    },
+)
+
+qt.local_repo(
+    name = "qt6_local",
+    paths = {
+        "macos-arm64": "/opt/homebrew/opt/qt",
+        "linux-x86_64": "/usr/lib/qt6",
+    },
+)
+
+# Remote Qt candidates from source tarballs.
+qt.remote_repo(
+    name = "qt5_remote",
+    base_url = "https://download.qt.io/archive/qt/5.15/5.15.18/submodules",
+    configure_args = [
+        "-opensource",
+        "-confirm-license",
+        "-release",
+        "-shared",
+        "-nomake",
+        "examples",
+        "-nomake",
+        "tests",
+    ],
+    # @unsorted-dict-items
+    # order matters
+    modules = {
+        "qtbase-everywhere-opensource-src-5.15.18.tar.xz": "7b632550ea1048fc10c741e46e2e3b093e5ca94dfa6209e9e0848800e247023b",
+        "qtimageformats-everywhere-opensource-src-5.15.18.tar.xz": "bf86000a21a1280f7a8aaf12dd9a10e59e778169653b53c86ad8f346fb39c066",
+        "qtsvg-everywhere-opensource-src-5.15.18.tar.xz": "f40d88ff792512af3500563b05f37b7b83591135b9413454fd308857594d89e9",
+        "qtdeclarative-everywhere-opensource-src-5.15.18.tar.xz": "876f20c476f07a07c53756b84c8ede7162d455ee0927b995acceb7c64e5c17a7",
+        "qtgraphicaleffects-everywhere-opensource-src-5.15.18.tar.xz": "dbefca590ef1d1f1c79c396f0f28f73cc16465c3a80803acc4a3ffa2f6d63225",
+        "qtquickcontrols-everywhere-opensource-src-5.15.18.tar.xz": "78b05bfac92bef099209aa56fdf4ca4558172583752f6736450fc0368bde01df",
+        "qtquickcontrols2-everywhere-opensource-src-5.15.18.tar.xz": "3dfc92cb64fb330ff4538bec7f5c34906289728d53b046f478f05787ddc00db9",
+        "qtquick3d-everywhere-opensource-src-5.15.18.tar.xz": "24743512942e882973abfc71f60e77c350b66d41cc8c9e315171cb84fb638e0c",
+    },
+    prefix = "qt-5.15.18",
+)
+
+qt.remote_repo(
+    name = "qt6_remote",
+    base_url = "https://download.qt.io/official_releases/qt/6.11/6.11.0/submodules",
+    configure_args = [
+        "-opensource",
+        "-confirm-license",
+        "-release",
+        "-shared",
+        "-nomake",
+        "examples",
+        "-nomake",
+        "tests",
+    ],
+    # @unsorted-dict-items
+    # order matters
+    modules = {
+        "qtbase-everywhere-src-6.11.0.tar.xz": "231ad85979864d914dc9568a1b71c91d6cf20d7b2021d059103bf0eb51cb755e",
+        "qtimageformats-everywhere-src-6.11.0.tar.xz": "d3adb02ac5e2fe24068dbdaee0d7cc68cc3fa8553291c1bfce77c9fe8e940cc8",
+        "qtsvg-everywhere-src-6.11.0.tar.xz": "dfa8d653be07087d9407ed4a4ebae847f8953e0b7abd829f089803ab652a30e6",
+        "qtshadertools-everywhere-src-6.11.0.tar.xz": "e43cb1ae8809b2a858281ee269f98da59d0fc1bcf958ca5510c81f7ad3d2e14a",
+        "qtdeclarative-everywhere-src-6.11.0.tar.xz": "4eece569431ddf8324e7d322fa27001916570b23df535f8fb28aba445eedfde9",
+        "qtquicktimeline-everywhere-src-6.11.0.tar.xz": "06dbe1cc541431fa321023992ca4ccf83c76b25d07bbf516e0af887a38f32cd6",
+        "qtquick3d-everywhere-src-6.11.0.tar.xz": "b42000bb33e55b6c642657eb7022ee1f74f9e19cf64d52e85d41763f567b8994",
+    },
+    prefix = "qt-6.11.0",
+)
+
+# Active SDK switch — change the repo value to switch:
+#   qt5_local / qt6_local    — locally installed Qt (path auto-selected by platform)
+#   qt5_remote / qt6_remote  — source-built Qt
+qt.active_sdk(name = "qt", repo = "qt6_local")
+use_repo(qt, "qt")
+
+http_archive(
+    name = "qtdeclarative-5.15",
+    build_file_content = "package(default_visibility = [\"//visibility:public\"])",
+    patch_args = [
+        "-p1",
+        "-ruN",
+    ],
+    patches = ["//:qtdeclarative-5.15/qtdeclarative-5.15-bazel.patch"],
+    sha256 = "3c6471c75008a2cd7ce72c1ab5f4d5da788c90242ab6efa5fdc6096158c1db56",
+    strip_prefix = "qtdeclarative-19ed7973a311a8d42d3a558bb551230e902ce9b9",
+    url = "https://github.com/qt/qtdeclarative/archive/19ed7973a311a8d42d3a558bb551230e902ce9b9.zip",
+)
+
+http_archive(
+    name = "qtdeclarative-6.4",
+    build_file_content = "package(default_visibility = [\"//visibility:public\"])",
+    patch_args = [
+        "-p1",
+        "-ruN",
+    ],
+    patches = ["//:qtdeclarative-6.4/qtdeclarative-6.4-bazel.patch"],
+    sha256 = "651a5921060c6da6a9bc2fcf644e95dbd4122d8c364274afabca680abdccdfe6",
+    strip_prefix = "qtdeclarative-7161b3a04d08aea891bd7c7e459437260d29c3f3",
+    url = "https://github.com/qt/qtdeclarative/archive/7161b3a04d08aea891bd7c7e459437260d29c3f3.zip",
+)
+
+http_archive(
+    name = "qtquick3d-5.15",
+    build_file_content = "package(default_visibility = [\"//visibility:public\"])",
+    patch_args = [
+        "-p1",
+        "-ruN",
+    ],
+    patches = ["//:qtquick3d-5.15/qtquick3d-5.15-bazel.patch"],
+    sha256 = "3e3039c8b6405825ad594c783b82ff6892de34ab82d072d9818fdb99f8976595",
+    strip_prefix = "qtquick3d-a78f1c57dfb3459be43c856d6bda16f3dfdc3b15",
+    url = "https://github.com/qt/qtquick3d/archive/a78f1c57dfb3459be43c856d6bda16f3dfdc3b15.zip",
+)
+
+http_archive(
+    name = "qtquick3d-6.4",
+    build_file_content = "package(default_visibility = [\"//visibility:public\"])",
+    patch_args = [
+        "-p1",
+        "-ruN",
+    ],
+    patches = ["//:qtquick3d-6.4/qtquick3d-6.4-bazel.patch"],
+    sha256 = "080dcc9ee80acbcdca600c1736990daed0abfbfef1c51a75e52b17000b43cf1c",
+    strip_prefix = "qtquick3d-cb7c2d87819d8afec18bd8e247d413b97b95c997",
+    url = "https://github.com/qt/qtquick3d/archive/cb7c2d87819d8afec18bd8e247d413b97b95c997.zip",
+)
+
+http_files(
+    name = "damaged_helmet_gltf",
+    urls = {
+        "https://raw.githubusercontent.com/KhronosGroup/glTF-Sample-Models/master/2.0/DamagedHelmet/glTF/DamagedHelmet.bin": "61b33ead6aa3de23f39f02aaf0965bc3988575716a768f45b15d5ea3fb783fdf",
+        "https://raw.githubusercontent.com/KhronosGroup/glTF-Sample-Models/master/2.0/DamagedHelmet/glTF/DamagedHelmet.gltf": "efe99dfac198094a30c71dc02a4d3421f0eef6bf335aeb695daa4d62134cd93f",
+        "https://raw.githubusercontent.com/KhronosGroup/glTF-Sample-Models/master/2.0/DamagedHelmet/glTF/Default_AO.jpg": "7024051b65ed2ead8d24ebc9bd5ea61d4c21639a57b15dab29870668bcc6b90f",
+        "https://raw.githubusercontent.com/KhronosGroup/glTF-Sample-Models/master/2.0/DamagedHelmet/glTF/Default_albedo.jpg": "2dc95e87aeb0cd7c8a65ef0eb8b23212388da0534ca379811427a9a8780511f5",
+        "https://raw.githubusercontent.com/KhronosGroup/glTF-Sample-Models/master/2.0/DamagedHelmet/glTF/Default_emissive.jpg": "dd0057989f22f93a4ab796d06ebf85a7c12fbfae1d59a86ae8b0c54770dc1159",
+        "https://raw.githubusercontent.com/KhronosGroup/glTF-Sample-Models/master/2.0/DamagedHelmet/glTF/Default_metalRoughness.jpg": "0f05e7ffbeaa974f7d2c83436b04109969966d64ab188cbc3a19a265a0a69ae0",
+        "https://raw.githubusercontent.com/KhronosGroup/glTF-Sample-Models/master/2.0/DamagedHelmet/glTF/Default_normal.jpg": "f253ba09a90a86ffd8a807dc45d7953111f8b3421e15d7a21d1e915b01dd33c1",
+    },
+)
+
+register_toolchains(
+    "@qt//:qt_linux_x86_64_toolchain",
+    "@qt//:qt_linux_arm64_toolchain",
+    "@qt//:qt_osx_arm64_toolchain",
+)

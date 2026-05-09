@@ -1,4 +1,4 @@
-load("@com_github_kklochkov_rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_cc_uic")
+load("@rules_qt//qt:defs.bzl", "qt_cc_binary", "qt_cc_uic")
 load("@qt//:qtconf.bzl", "QT_INSTALL_PLUGINS", "QT_VERSION")
 load("@rules_cc//cc:defs.bzl", "cc_binary")
 

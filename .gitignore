@@ -2,4 +2,5 @@
 .clang-format
 compile_commands.json
 bazel-*
-external
+/external
+MODULE.bazel.lock

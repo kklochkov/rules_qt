@@ -21,6 +21,20 @@ bzl_library(
     ],
 )
 
+bzl_library(
+    name = "bzl_repo_rules",
+    srcs = [
+        "qt_http_repo.bzl",
+        "qt_local_repo.bzl",
+        "qt_remote_repo.bzl",
+    ],
+    deps = [
+        ":bzl_rules",
+        "@bazel_skylib//lib:paths",
+        "@bazel_skylib//lib:structs",
+    ],
+)
+
 stardoc(
     name = "docs",
     out = "docs.md",
@@ -44,28 +58,28 @@ stardoc(
     name = "qt_local_repo_docs",
     out = "qt_local_repo-docs.md",
     input = "qt_local_repo.bzl",
-    deps = [
-        ":bzl_rules",
-        "@bazel_skylib//lib:paths",
-        "@bazel_skylib//lib:structs",
-    ],
+    deps = [":bzl_repo_rules"],
 )
 
 stardoc(
     name = "qt_http_repo_docs",
     out = "qt_http_repo-docs.md",
     input = "qt_http_repo.bzl",
-    deps = [
-        ":bzl_rules",
-        "@bazel_skylib//lib:paths",
-        "@bazel_skylib//lib:structs",
-    ],
+    deps = [":bzl_repo_rules"],
+)
+
+stardoc(
+    name = "qt_remote_repo_docs",
+    out = "qt_remote_repo-docs.md",
+    input = "qt_remote_repo.bzl",
+    deps = [":bzl_repo_rules"],
 )
 
 stardoc(
     name = "providers_docs",
     out = "providers-docs.md",
-    input = "private/utils.bzl",
+    input = "providers.bzl",
+    deps = [":bzl_rules"],
 )
 
 stardoc(

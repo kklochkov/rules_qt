@@ -1,6 +1,6 @@
 """Providers to exchange information between Qt's rules."""
 
-QT_TOOLCHAIN = "@com_github_kklochkov_rules_qt//qt:toolchain_type"
+QT_TOOLCHAIN = "@rules_qt//qt:toolchain_type"
 QT_REPO_INSTALL_FILE = "install"
 
 MocInfo = provider(fields = {
@@ -22,3 +22,14 @@ def version_triplet(version):
 
     major, minor, patch = [int(v) for v in version.split(".")][:3]
     return major, minor, patch
+
+def unique(items):
+    """Deduplicates a list while preserving insertion order.
+
+    Args:
+      items: A list of hashable items.
+
+    Returns:
+      A new list with duplicates removed, preserving the order of first occurrence.
+    """
+    return list({item: None for item in items}.keys())

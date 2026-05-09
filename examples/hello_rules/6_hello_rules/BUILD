@@ -1,6 +1,16 @@
-load("@com_github_kklochkov_rules_qt//qt:defs.bzl", "qt_balsam", "qt_cc_binary", "qt_cc_moc", "qt_cc_moc_import", "qt_cc_rcc", "qt_cc_uic", "qt_qml_cc_module", "qt_qrc")
+load("@rules_qt//qt:defs.bzl", "qt_balsam", "qt_cc_binary", "qt_cc_moc", "qt_cc_moc_import", "qt_cc_rcc", "qt_cc_uic", "qt_qml_cc_module", "qt_qrc")
 load("@qt//:qtconf.bzl", "QT_INSTALL_PLUGINS", "QT_INSTALL_QML", "QT_VERSION")
 load("@rules_cc//cc:defs.bzl", "cc_binary")
+
+_QT_QML_DEPS = [
+    "@qt//:QtCore",
+    "@qt//:QtGui",
+    "@qt//:QtNetwork",
+    "@qt//:QtQml",
+    "@qt//:QtQuick",
+    "@qt//:QtQuick3D",
+    "@qt//:QtWidgets",
+]
 
 # Example of `qt_qrc`,`qt_cc_rcc`, `qt_cc_moc`, qt_cc_moc_import˙, `qt_qml_cc_module`, ˙qt_cc_uic˙ and `qt_balsam` usage.
 qt_cc_uic(
@@ -48,6 +58,9 @@ qt_qml_cc_module(
     minor_version = 3,  # if not provided, defaults to 0
     moc = ":text_provider_moc_hdrs",
     module_name = "TextProvider",
+    # Direct qt_qml_cc_module usage has no access to consumer cc_binary deps.
+    # Provide Qt deps here to keep qmltyperegistrar foreign types scoped.
+    deps = _QT_QML_DEPS,
 )
 
 qt_cc_moc_import(
@@ -79,14 +92,7 @@ cc_binary(
         # must be added here to prevent compilation issues.
         ":ui",
         ":moc_srcs",
-        "@qt//:QtCore",
-        "@qt//:QtGui",
-        "@qt//:QtNetwork",
-        "@qt//:QtQml",
-        "@qt//:QtQuick",
-        "@qt//:QtQuick3D",
-        "@qt//:QtWidgets",
-    ],
+    ] + _QT_QML_DEPS,
 )
 
 cc_binary(
@@ -118,14 +124,7 @@ cc_binary(
         # must be added here to prevent compilation issues.
         ":ui",
         ":moc_srcs",
-        "@qt//:QtCore",
-        "@qt//:QtGui",
-        "@qt//:QtNetwork",
-        "@qt//:QtQml",
-        "@qt//:QtQuick",
-        "@qt//:QtQuick3D",
-        "@qt//:QtWidgets",
-    ],
+    ] + _QT_QML_DEPS,
 )
 
 # Example of `qt_cc_binary` macro usage.
@@ -154,15 +153,7 @@ qt_cc_binary(
         ":damaged_helmet",
     ],
     ui_srcs = ["widget.ui"],
-    deps = [
-        "@qt//:QtCore",
-        "@qt//:QtGui",
-        "@qt//:QtNetwork",
-        "@qt//:QtQml",
-        "@qt//:QtQuick",
-        "@qt//:QtQuick3D",
-        "@qt//:QtWidgets",
-    ],
+    deps = _QT_QML_DEPS,
 )
 
 qt_cc_binary(
@@ -188,13 +179,5 @@ qt_cc_binary(
     qml_module_minor_version = 3,  # if not provided, defaults to 0
     qml_module_name = "TextProvider",
     ui_srcs = ["widget.ui"],
-    deps = [
-        "@qt//:QtCore",
-        "@qt//:QtGui",
-        "@qt//:QtNetwork",
-        "@qt//:QtQml",
-        "@qt//:QtQuick",
-        "@qt//:QtQuick3D",
-        "@qt//:QtWidgets",
-    ],
+    deps = _QT_QML_DEPS,
 )

@@ -39,7 +39,7 @@ def _qrc_impl(ctx):
 
     qrcs = list(ctx.files.srcs)
     if len(qrcs) != 0 and len(ctx.attr.prefix) != 0:
-        print("Both 'srcs' and 'prefix' attributes are provided. The 'prefix' attibute will be inored.")
+        print("Both 'srcs' and 'prefix' attributes are provided. The 'prefix' attribute will be ignored.")  # buildifier: disable=print
 
     data = list(ctx.files.data)
     if len(qrcs) == 0:
@@ -87,7 +87,7 @@ Only available for auto `qrc` file generation, i.e. when the `srcs` attribute is
         "srcs": attr.label_list(
             allow_files = [".qrc"],
             doc = """
-A list of `qrc` files for will propagated to [qt_cc_rcc](#qt_cc_rcc) via [QrcInfo](providers-docs.md#QrcInfo).
+A list of `qrc` files that will be propagated to [qt_cc_rcc](#qt_cc_rcc) via [QrcInfo](providers-docs.md#QrcInfo).
 """,
         ),
     },
