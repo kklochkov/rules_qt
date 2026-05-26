@@ -1,5 +1,6 @@
 """A set of convenience macros for using Qt's rules with Bazel."""
 
+load("@rules_cc//cc:defs.bzl", "cc_binary", "cc_library")
 load(":private/balsam.bzl", "balsam")
 load(":private/moc.bzl", "moc_hdrs", "moc_srcs")
 load(":private/qml.bzl", "qml_module")
@@ -111,7 +112,7 @@ def qt_cc_library(
       **kwargs: Additional arguments for `cc_library` rule.
     """
     _qt_cc_target(
-        native.cc_library,
+        cc_library,
         name,
         srcs,
         deps,
@@ -256,7 +257,7 @@ def qt_cc_binary(
         fail("qt_cc_binary: compatibility target name collision for '{target}'".format(target = compat_name))
 
     _qt_cc_target(
-        native.cc_binary,
+        cc_binary,
         inner_name,
         srcs,
         deps,

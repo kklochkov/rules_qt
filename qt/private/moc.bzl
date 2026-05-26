@@ -1,5 +1,6 @@
 """Rules that allow to use [Qt's moc](https://doc.qt.io/qt-5/moc.html) with Bazel."""
 
+load("@rules_cc//cc/common:cc_info.bzl", "CcInfo")
 load(":private/utils.bzl", "MocInfo", "QT_TOOLCHAIN")
 
 def _moc_hdrs_impl(ctx):
