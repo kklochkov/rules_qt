@@ -1,5 +1,6 @@
 """Rules that allow to use [Qt's uic](https://doc.qt.io/qt-5/uic.html) with Bazel."""
 
+load("@rules_cc//cc/common:cc_info.bzl", "CcInfo")
 load(":private/utils.bzl", "QT_TOOLCHAIN")
 
 def _uic_impl(ctx):
