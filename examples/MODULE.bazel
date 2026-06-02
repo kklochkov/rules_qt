@@ -1,7 +1,7 @@
 module(name = "com_github_kklochkov_rules_qt_examples")
 
 bazel_dep(name = "rules_qt", version = "2.0.0")
-bazel_dep(name = "rules_cc", version = "0.1.1")
+bazel_dep(name = "rules_cc", version = "0.2.19")
 local_path_override(
     module_name = "rules_qt",
     path = "..",

@@ -1,5 +1,6 @@
 """Rules that allow to use [Qt's moc](https://doc.qt.io/qt-5/moc.html) with Bazel."""
 
+load("@rules_cc//cc/common:cc_common.bzl", "cc_common")
 load("@rules_cc//cc/common:cc_info.bzl", "CcInfo")
 load(":private/utils.bzl", "MocInfo", "QT_TOOLCHAIN")
 
@@ -28,7 +29,21 @@ def _moc_hdrs_impl(ctx):
         args.add("--output-json")
         #args.add("--debug-includes") # very useful for debugging
 
-        for include_dir in compilation_context.system_includes.to_list():
+        # `cc_library` `includes` from an external repository are propagated
+        # via `compilation_context.external_includes`, not `system_includes`.
+        # Reading only `system_includes` misses the Qt headers from
+        # `@qt//:all_headers`, so moc cannot find <qqml.h>, drops
+        # QML_ELEMENT classinfos, and types end up unregistered at runtime
+        # (e.g. "TextProvider is not a type"). Aggregate all relevant fields
+        # to be robust. `getattr` keeps older rules_cc releases working.
+        # Same class of issue as https://github.com/bazelbuild/intellij/issues/4980 (different consumer).
+        include_dirs = depset(transitive = [
+            compilation_context.includes,
+            compilation_context.quote_includes,
+            compilation_context.system_includes,
+            getattr(compilation_context, "external_includes", depset()),
+        ]).to_list()
+        for include_dir in include_dirs:
             args.add("-I", include_dir)
 
         args.add(hdr)
